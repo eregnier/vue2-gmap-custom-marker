@@ -62,3 +62,10 @@ computed: {
 ```
  :key="marker.id + (marker.condition ? '-refresh-tag' : 0)"
 ```
+
+Licence
+-------
+
+MIT
+https://fr.wikipedia.org/wiki/Licence_MIT
+
