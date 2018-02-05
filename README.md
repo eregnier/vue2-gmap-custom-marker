@@ -9,9 +9,13 @@ Here is how to use this component
 
  * import the component and use it in your own vue map component
 
-import GmapCustomMarker from 'vue2-gmap-custom-marker'; 
+
 
 ```
+import GmapCustomMarker from 'vue2-gmap-custom-marker'; 
+
+[...]
+
 components: {
     'gmap-custom-marker': GmapCustomMarker
 },
