@@ -83,7 +83,7 @@ export default {
         if (this.getProjection() && typeof position.lng == 'function') {
           var setPosition = function() {
             if (!_this.getProjection()) { return; }
-            var posPixel = _this.getProjection().fromLatLngToDivPixel(position);
+            var posPixel = _this.getProjection().fromLatLngToDivPixel(self.position);
             var x = Math.round(posPixel.x - (_this._div.offsetWidth/2));
             var y = Math.round(posPixel.y - _this._div.offsetHeight - 10); // 10px for anchor
             _this._div.style.left = x + "px";
@@ -130,10 +130,6 @@ export default {
         if(!this._div) {
           return;
         }
-        // Retrieve the south-west and north-east coordinates of this overlay
-        // in LatLngs and convert them to pixel coordinates.
-        // We'll use these coordinates to resize the div.
-        this.setPosition(self.position);
 
         if (self.previousLat !== self.position.lat() && self.previousLng !== self.position.lng()) {
           var div = this._div;
@@ -142,8 +138,12 @@ export default {
         self.previousLat = self.position.lat();
         self.previousLng = self.position.lng();
 
+        // Retrieve the south-west and north-east coordinates of this overlay
+        // in LatLngs and convert them to pixel coordinates.
+        // We'll use these coordinates to resize the div.
+        this.setPosition(self.position);
 
-      },300);
+      }, 10);
 
       // The onRemove() method will be called automatically from the API if
       // we ever set the overlay's map property to 'null'.
