@@ -2,7 +2,9 @@ Custom marker component for vue 2 js google map
 -----------------------------------------------
 
 This component let user display custom html content on the map using Overlay.
-This component is an adaptation of the google map V3 overlay code sample with some great ideas from 
+This component is an adaptation of the google map V3 overlay code sample with some great ideas from angularjs google map https://ngmap.github.io/ from this component https://github.com/allenhwkim/angularjs-google-maps/blob/master/directives/custom-marker.js
+
+This project is a plugin for https://github.com/xkjyeah/vue-google-maps
 
 Sample
 ------
