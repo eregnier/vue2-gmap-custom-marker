@@ -6,6 +6,7 @@
 <script>
 import Vue from 'vue';
 import * as VueGoogleMaps from 'vue2-google-maps';
+import _ from 'underscore';
 export default {
   mixins: [VueGoogleMaps.MapElementMixin],
   props: ['marker', 'onClick'],
@@ -16,7 +17,9 @@ export default {
   },
   data () {
     return {
-      clickListener: {remove () {}}
+      clickListener: {remove () {}},
+      previousLat: undefined,
+      previousLng: undefined
     }
   },
   computed: {
@@ -65,6 +68,12 @@ export default {
         this.map_ = map;
         // Explicitly call setMap on this overlay.
         this.setMap(map);
+
+        var overlay = this;
+        this.dragendListener = google.maps.event.addListener(map, 'dragend', function () {
+          overlay._div.style.visibility = "hidden";
+        });
+
       }
 
 
@@ -102,7 +111,6 @@ export default {
         div.style.display = 'inline-block';
         div.style.zIndex = 10000;
         this._div = div;
-        //div.style.visibility = "hidden";
         this.visible = true;
 
         var panes = this.getPanes();
@@ -114,35 +122,28 @@ export default {
             self.onClick(self.marker);
           }
         });
+
       };
 
-      Overlay.prototype.draw = function() {
+      Overlay.prototype.draw = _.debounce(function(e) {
+
         if(!this._div) {
           return;
         }
-        var div = this._div;
-        div.innerHTML = self.$el.innerHTML;
-        // We use the south-west and north-east
-        // coordinates of the overlay to peg it to the correct position and size.
-        // To do this, we need to retrieve the projection from the overlay.
-        var overlayProjection = this.getProjection();
-
-
-        /*
         // Retrieve the south-west and north-east coordinates of this overlay
         // in LatLngs and convert them to pixel coordinates.
         // We'll use these coordinates to resize the div.
-        var sw = overlayProjection.fromLatLngToDivPixel(self.bounds.getSouthWest());
-        var ne = overlayProjection.fromLatLngToDivPixel(self.bounds.getNorthEast());
-        // Resize the image's div to fit the indicated dimensions.
-        div.style.left = sw.x + 'px';
-        div.style.top = ne.y + 'px';
-        div.style.width = (ne.x - sw.x) + 'px';
-        div.style.height = (sw.y - ne.y) + 'px';
-        //console.log(div.style.left, div.style.top);
-        */
         this.setPosition(self.position);
-      };
+
+        if (self.previousLat !== self.position.lat() && self.previousLng !== self.position.lng()) {
+          var div = this._div;
+          div.innerHTML = self.$el.innerHTML;
+        }
+        self.previousLat = self.position.lat();
+        self.previousLng = self.position.lng();
+
+
+      },300);
 
       // The onRemove() method will be called automatically from the API if
       // we ever set the overlay's map property to 'null'.
@@ -150,13 +151,9 @@ export default {
         this.map_ = undefined;
         this._div.remove();
         this._div = undefined;
+        this.dragendListener.remove();
       };
 
-      /*
-      Overlay.prototype.onRemove = function() {
-        this.map_ = undefined;
-      };
-    */
       this.$overlay = new Overlay(this.$map);
     }
 
