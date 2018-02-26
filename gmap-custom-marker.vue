@@ -18,6 +18,7 @@ export default {
   data () {
     return {
       clickListener: {remove () {}},
+      touchListener: {remove () {}},
       previousLat: undefined,
       previousLng: undefined
     }
@@ -55,6 +56,7 @@ export default {
     }
     this.$overlay = undefined;
     this.clickListener.remove();
+    this.touchListener.remove();
   },
   methods: {
     initOverlay (createElement) {
@@ -117,11 +119,14 @@ export default {
         panes.overlayLayer.appendChild(div);
         panes.overlayMouseTarget.appendChild(div);
 
-        self.clickListener = google.maps.event.addDomListener(div, 'click', function() {
+        var onClick = function() {
           if (self.onClick !== undefined) {
             self.onClick(self.marker);
           }
-        });
+        };
+
+        self.touchListener = google.maps.event.addDomListener(div, 'touchstart', onClick);
+        self.clickListener = google.maps.event.addDomListener(div, 'click', onClick);
 
       };
 
