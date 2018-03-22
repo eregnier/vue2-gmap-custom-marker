@@ -126,7 +126,7 @@ export default {
         };
 
         self.touchListener = google.maps.event.addDomListener(div, 'touchstart', onClick);
-        self.clickListener = google.maps.event.addDomListener(div, 'click', onClick);
+        self.clickListener = google.maps.event.addDomListener(div, 'mousedown', onClick);
 
       };
 
