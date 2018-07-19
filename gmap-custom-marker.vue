@@ -15,6 +15,12 @@ export default {
       this.$overlay.draw();
     },
   },
+  provide: function () {
+    var self = this;
+    this.$mapPromise.then(function (map) {
+      self.$overlay = self.initOverlay(map);
+    });
+  },
   data () {
     return {
       clickListener: {remove () {}},
@@ -24,7 +30,6 @@ export default {
     }
   },
   computed: {
-
     bounds () {
       var lat = parseFloat(this.marker.latitude);
       var lng = parseFloat(this.marker.longitude);
@@ -44,9 +49,6 @@ export default {
       }
     }
   },
-  deferredReady: function() {
-    this.initOverlay();
-  },
   destroyed: function() {
     this.$overlay.setMap(null);
     if (self.$el) {
@@ -59,7 +61,7 @@ export default {
     this.touchListener.remove();
   },
   methods: {
-    initOverlay (createElement) {
+    initOverlay (map) {
 
       var self = this;
       Overlay.prototype = new google.maps.OverlayView();
@@ -131,7 +133,6 @@ export default {
       };
 
       Overlay.prototype.draw = _.debounce(function(e) {
-
         if(!this._div) {
           return;
         }
@@ -159,9 +160,8 @@ export default {
         this.dragendListener.remove();
       };
 
-      this.$overlay = new Overlay(this.$map);
+      return new Overlay(map);
     }
-
   }
 };
 </script>
