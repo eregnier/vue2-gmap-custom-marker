@@ -151,7 +151,7 @@ export default {
         // We'll use these coordinates to resize the div.
         this.setPosition(self.position);
 
-      }, 10);
+      }, 10, { trailing: false });
 
       // The onRemove() method will be called automatically from the API if
       // we ever set the overlay's map property to 'null'.
