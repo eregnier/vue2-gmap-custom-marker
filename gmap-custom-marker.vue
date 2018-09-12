@@ -12,7 +12,7 @@ export default {
   props: ['marker', 'onClick'],
   watch: {
     marker: function (val) {
-      this.$overlay.draw();
+     this.$mapPromise.then(map => this.$overlay.draw());
     },
   },
   provide: function () {
@@ -75,7 +75,9 @@ export default {
 
         var overlay = this;
         this.dragendListener = google.maps.event.addListener(map, 'dragend', function () {
-          overlay._div.style.visibility = "hidden";
+	         if (overlay._div !== undefined) {
+	            overlay._div.style.visibility = "hidden";
+	         }
         });
 
       }
@@ -155,8 +157,10 @@ export default {
       // we ever set the overlay's map property to 'null'.
       Overlay.prototype.onRemove = function() {
         this.map_ = undefined;
-        this._div.remove();
-        this._div = undefined;
+	      if (this._div !== undefined) {
+	        this._div.remove();
+        	this._div = undefined;
+	      }
         this.dragendListener.remove();
       };
 
