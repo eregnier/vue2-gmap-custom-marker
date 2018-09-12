@@ -84,5 +84,5 @@ Licence
 -------
 
 MIT
-https://fr.wikipedia.org/wiki/Licence_MIT
+https://en.wikipedia.org/wiki/MIT_License
 
