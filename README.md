@@ -1,6 +1,11 @@
 Custom marker component for vue 2 js google map
 -----------------------------------------------
 
+Demo
+----
+
+[demo from gh-pages branch](https://eregnier.github.io/vue2-gmap-custom-marker/dist/)
+
 `npm i vue2-gmap-custom-marker`
 
 https://www.npmjs.com/package/vue2-gmap-custom-marker
@@ -25,7 +30,7 @@ Here is how to use this component
 
 
 ```
-import GmapCustomMarker from 'vue2-gmap-custom-marker'; 
+import GmapCustomMarker from 'vue2-gmap-custom-marker';
 
 [...]
 
@@ -49,7 +54,7 @@ components: {
 ```
 
 At the moment, the component api looks like :
-  
+
   * handles onClick callback and give as first argument the given prop `:marker`
 
 ```
@@ -67,14 +72,14 @@ computed: {
    places () {
       return [
         {
-          latitude: 50.60229509638775, 
-          longitude: 3.0247059387528408 
+          latitude: 50.60229509638775,
+          longitude: 3.0247059387528408
         }
       ]
    }
 }
 ```
- 
+
  * refresh management using vue key change (this is a kind of hack)
 ```
  :key="marker.id + (marker.condition ? '-refresh-tag' : 0)"
@@ -85,4 +90,3 @@ Licence
 
 MIT
 https://en.wikipedia.org/wiki/MIT_License
-
