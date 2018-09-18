@@ -4,12 +4,14 @@
   "private": true,
   "scripts": {
     "serve": "vue-cli-service serve",
-    "build": "vue-cli-service build",
+    "build": "vue-cli-service build && sed s/href\\=\\\\//href\\=/g -i dist/index.html && sed s/src\\=\\\\//src\\=/g -i dist/index.html",
     "lint": "vue-cli-service lint"
   },
   "dependencies": {
+    "axios": "^0.18.0",
+    "eslint-plugin-vue": "^4.7.1",
     "vue": "^2.5.17",
-    "vue2-gmap-custom-marker": "^3.0.2",
+    "vue2-gmap-custom-marker": "^5.1.0",
     "vue2-google-maps": "^0.10.2"
   },
   "devDependencies": {
