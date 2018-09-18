@@ -1,5 +1,5 @@
 Arguments: 
-  /usr/local/bin/node /home/utopman/.yarn/bin/yarn.js add vue2-google-map
+  /usr/local/bin/node /home/utopman/.yarn/bin/yarn.js build
 
 PATH: 
   /home/utopman/.yarn/bin:/home/utopman/.config/yarn/global/node_modules/.bin:/home/utopman/.cargo/bin:/home/utopman/bin:/home/utopman/.local/bin:/usr/local/sbin:/usr/local/bin:/usr/sbin:/usr/bin:/sbin:/bin:/usr/games:/usr/local/games:/snap/bin:/home/utopman/bin:/opt/mongo/bin:/opt/node-v7.8.0-linux-x64/bin/:/opt/android-studio/gradle/gradle-4.1/bin/:/opt/android-studio/bin/:./node_modules/.bin/
@@ -14,33 +14,30 @@ Platform:
   linux x64
 
 Trace: 
-  Error: https://registry.yarnpkg.com/vue2-google-map: Not found
-      at Request.params.callback [as _callback] (/home/utopman/.yarn/lib/cli.js:64202:18)
-      at Request.self.callback (/home/utopman/.yarn/lib/cli.js:137468:22)
-      at Request.emit (events.js:182:13)
-      at Request.<anonymous> (/home/utopman/.yarn/lib/cli.js:138440:10)
-      at Request.emit (events.js:182:13)
-      at IncomingMessage.<anonymous> (/home/utopman/.yarn/lib/cli.js:138362:12)
-      at Object.onceWrapper (events.js:273:13)
-      at IncomingMessage.emit (events.js:187:15)
-      at endReadableNT (_stream_readable.js:1081:12)
-      at process._tickCallback (internal/process/next_tick.js:63:19)
+  SyntaxError: /home/utopman/sources/vue2-gmap-custom-marker/package.json: Unexpected token = in JSON at position 188
+      at JSON.parse (<anonymous>)
+      at /home/utopman/.yarn/lib/cli.js:1130:59
+      at Generator.next (<anonymous>)
+      at step (/home/utopman/.yarn/lib/cli.js:92:30)
+      at /home/utopman/.yarn/lib/cli.js:103:13
 
 npm manifest: 
   {
     "name": "vue2-gmap-custom-marker-demo",
-    "version": "0.1.0",
+    "version": "0.1.1",
     "private": true,
     "scripts": {
       "serve": "vue-cli-service serve",
-      "build": "vue-cli-service build",
+      "build": "vue-cli-service build && sed s/href\=\\\\\\//href\\\=/g -i dist/index.html && sed s/src\=\\\\\\//src\\\=/g -i dist/index.html",
       "lint": "vue-cli-service lint"
     },
     "dependencies": {
       "vue": "^2.5.17",
-      "vue2-gmap-custom-marker": "^3.0.2"
+      "vue2-gmap-custom-marker": "^4.0.0",
+      "vue2-google-maps": "^0.10.2"
     },
     "devDependencies": {
+      "@babel/runtime-corejs2": "^7.0.0",
       "@vue/cli-plugin-babel": "^3.0.1",
       "@vue/cli-plugin-eslint": "^3.0.1",
       "@vue/cli-service": "^3.0.1",
@@ -640,6 +637,13 @@ Lockfile:
       browserslist "^3.0.0"
       invariant "^2.2.2"
       semver "^5.3.0"
+  
+  "@babel/runtime-corejs2@^7.0.0":
+    version "7.0.0"
+    resolved "https://registry.yarnpkg.com/@babel/runtime-corejs2/-/runtime-corejs2-7.0.0.tgz#786711ee099c2c2af7875638866c1259eff30a8c"
+    dependencies:
+      core-js "^2.5.7"
+      regenerator-runtime "^0.12.0"
   
   "@babel/runtime@7.0.0-beta.47":
     version "7.0.0-beta.47"
@@ -1938,7 +1942,7 @@ Lockfile:
     version "1.2.7"
     resolved "https://registry.yarnpkg.com/core-js/-/core-js-1.2.7.tgz#652294c14651db28fa93bd2d5ff2983a4f08c636"
   
-  core-js@^2.5.3:
+  core-js@^2.5.3, core-js@^2.5.7:
     version "2.5.7"
     resolved "https://registry.yarnpkg.com/core-js/-/core-js-2.5.7.tgz#f972608ff0cead68b841a16a932d0b183791814e"
   
@@ -5440,6 +5444,10 @@ Lockfile:
     version "0.11.1"
     resolved "https://registry.yarnpkg.com/regenerator-runtime/-/regenerator-runtime-0.11.1.tgz#be05ad7f9bf7d22e056f9726cee5017fbf19e2e9"
   
+  regenerator-runtime@^0.12.0:
+    version "0.12.1"
+    resolved "https://registry.yarnpkg.com/regenerator-runtime/-/regenerator-runtime-0.12.1.tgz#fa1a71544764c036f8c49b13a08b2594c9f8a0de"
+  
   regenerator-transform@^0.12.3:
     version "0.12.4"
     resolved "https://registry.yarnpkg.com/regenerator-transform/-/regenerator-transform-0.12.4.tgz#aa9b6c59f4b97be080e972506c560b3bccbfcff0"
@@ -6573,9 +6581,9 @@ Lockfile:
     version "1.6.0"
     resolved "https://registry.yarnpkg.com/vue-template-es2015-compiler/-/vue-template-es2015-compiler-1.6.0.tgz#dc42697133302ce3017524356a6c61b7b69b4a18"
   
-  vue2-gmap-custom-marker@^3.0.2:
-    version "3.0.2"
-    resolved "https://registry.yarnpkg.com/vue2-gmap-custom-marker/-/vue2-gmap-custom-marker-3.0.2.tgz#a6306aae681afadc9db8c9e30a01cb8165113d61"
+  vue2-gmap-custom-marker@^4.0.0:
+    version "4.0.0"
+    resolved "https://registry.yarnpkg.com/vue2-gmap-custom-marker/-/vue2-gmap-custom-marker-4.0.0.tgz#d590e3f07a4b9e735814d907886eeec240216a53"
     dependencies:
       underscore "^1.9.1"
       vue "^2.5.17"

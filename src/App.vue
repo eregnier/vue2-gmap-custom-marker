@@ -13,7 +13,6 @@
         :marker="markerCenter">
         <div class="card" @click="e => e.stopPropagation()">
           <center>
-            <h1>Click on the map to move me around</h1>
             <p>{{markerCenter}}</p>
           </center>
           <img class="icon" :src="src" height="75"/>
@@ -71,7 +70,7 @@ export default {
   background-color: #efefef;
   padding: 15px;
   border: 1px solid black;
-  min-height: 188px;
+  min-height: 110px;
 }
 .input-group {
   float: right;

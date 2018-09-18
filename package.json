@@ -4,7 +4,7 @@
   "private": true,
   "scripts": {
     "serve": "vue-cli-service serve",
-    "build": "vue-cli-service build",
+    "build": "vue-cli-service build && sed s/href\\=\\\\//href\\=/g -i dist/index.html && sed s/src\\=\\\\//src\\=/g -i dist/index.html",
     "lint": "vue-cli-service lint"
   },
   "dependencies": {
