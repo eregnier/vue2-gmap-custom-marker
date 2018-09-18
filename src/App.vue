@@ -4,7 +4,18 @@
       <gmap-custom-marker
         key="supermarker"
         :marker="markerCenter">
-        <img src="https://vuejs.org/images/logo.png" height="75"/>
+        <div class="card" @click="e => e.stopPropagation()">
+          <center>
+            <h1>Click on the map to move me around</h1>
+            <p>{{markerCenter}}</p>
+          </center>
+          <img class="icon" :src="testText ? testText : 'https://vuejs.org/images/logo.png'" height="75"/>
+          <div class="input-group">
+            <label>Image url </label>
+            <input type="input" v-model="testText"/>
+          </div>
+          <p>{{testText}}</p>
+        </div>
       </gmap-custom-marker>
     </vue-gmap>
   </div>
@@ -21,6 +32,7 @@ export default {
   },
   data () {
     return {
+      testText: '',
       markerCenter: {
         latitude: 50.6272265,
         longitude: 3.0571581
@@ -28,9 +40,7 @@ export default {
     }
   },
   methods: {
-    onMapClick (event) {
-      console.log('on map click', event)
-      console.log('click coords', {lat: event.latLng.lat(), lng: event.latLng.lng()})
+    onMapClick (event) {
       this.markerCenter = {
         latitude: event.latLng.lat(),
         longitude: event.latLng.lng()
@@ -41,4 +51,17 @@ export default {
 </script>
 
 <style>
+.card {
+  background-color: #efefef;
+  padding: 15px;
+  border: 1px solid black;
+}
+.input-group {
+  float: right;
+  margin-top:25px;
+  margin-right:25px;
+}
+.icon {
+  margin-left: 15px;
+}
 </style>
