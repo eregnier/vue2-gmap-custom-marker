@@ -110,12 +110,12 @@ export default {
        * added to the map.
        */
       Overlay.prototype.onAdd = function() {
-        var div = document.createElement('div');
+        var div = self.$el;
         div.style.borderStyle = 'none';
         div.style.borderWidth = '0px';
         div.style.position = 'absolute';
         div.style.display = 'inline-block';
-        div.style.zIndex = 10000;
+        div.style.zIndex = 1000;
         this._div = div;
         this.visible = true;
 
@@ -138,14 +138,6 @@ export default {
         if(!this._div) {
           return;
         }
-
-        if (self.previousLat !== self.position.lat() && self.previousLng !== self.position.lng()) {
-          var div = this._div;
-          div.innerHTML = self.$el.innerHTML;
-        }
-        self.previousLat = self.position.lat();
-        self.previousLng = self.position.lng();
-
         // Retrieve the south-west and north-east coordinates of this overlay
         // in LatLngs and convert them to pixel coordinates.
         // We'll use these coordinates to resize the div.
