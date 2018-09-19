@@ -4,9 +4,7 @@
   </div>
 </template>
 <script>
-import Vue from 'vue';
 import * as VueGoogleMaps from 'vue2-google-maps';
-import {debounce} from 'underscore';
 export default {
   mixins: [VueGoogleMaps.MapElementMixin],
   props: ['marker'],
