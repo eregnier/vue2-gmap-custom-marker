@@ -45,7 +45,7 @@ components: {
   :key="marker.id + (selectedMarker.id === marker.id ? '-force-refresh' : 0)"
   v-for="marker in places"
   :marker="marker"
-  :onClick="placeClick"
+  @click.native="placeClick"
   class="">
   >
       <img src="http://lorempixel.com/800/600/nature/" />
@@ -55,7 +55,7 @@ components: {
 
 At the moment, the component api looks like :
 
-  * handles onClick callback and give as first argument the given prop `:marker`
+  * handles click callback and give as first argument the given prop `:marker`
 
 ```
 methods: {
