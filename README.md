@@ -80,11 +80,6 @@ computed: {
 }
 ```
 
- * refresh management using vue key change (this is a kind of hack)
-```
- :key="marker.id + (marker.condition ? '-refresh-tag' : 0)"
-```
-
 Licence
 -------
 
