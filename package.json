@@ -9,7 +9,7 @@
   },
   "dependencies": {
     "vue": "^2.5.17",
-    "vue2-gmap-custom-marker": "^4.0.0",
+    "vue2-gmap-custom-marker": "^5.0.0",
     "vue2-google-maps": "^0.10.2"
   },
   "devDependencies": {

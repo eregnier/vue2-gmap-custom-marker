@@ -3,9 +3,10 @@
     <button class="button" :style="{'background-color': addMode ? '#66f13d' : '#3d66f1'}" @click="addMode=true">{{ addMode ? 'Click on the map' : '+ Add marker' }}</button>
     <vue-gmap :center="{lat: 50.6272265, lng: 3.0571581}" :zoom="12" style="width: 100%; height: 600px" @click="onMapClick">
       <gmap-custom-marker
-        v-for="(marker, i) in addMarkers"
+        v-for="(marker, i) in markers"
         :key="i"
-        :marker="marker">
+        :marker="marker"
+        @click.native="deleteMarker(i)">
           <img :title="JSON.stringify(marker)" class="icon-sm" :src="src" height="45"/>
       </gmap-custom-marker>
       <gmap-custom-marker
@@ -43,7 +44,7 @@ export default {
         longitude: 3.0571581
       },
       addMode: false,
-      addMarkers: []
+      markers: []
     }
   },
   computed: {
@@ -52,9 +53,12 @@ export default {
     }
   },
   methods: {
+    deleteMarker (i) {
+      this.markers.splice(i, 1)
+    },
     onMapClick (event) {
       if (this.addMode) {
-        this.addMarkers.push({
+        this.markers.push({
           latitude: event.latLng.lat(),
           longitude: event.latLng.lng()
         })
@@ -93,8 +97,6 @@ export default {
 }
 .icon-sm {
   padding: 3px;
-  background-color: #eee;
-  border: 1px solid #555;
   border-radius: 4px;
 }
 </style>
