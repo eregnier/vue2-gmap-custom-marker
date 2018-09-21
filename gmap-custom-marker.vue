@@ -51,11 +51,13 @@ export default {
       function Overlay(map) {
         this.setMap(map);
         const draw = () => {
-          var posPixel = this.getProjection().fromLatLngToDivPixel(self.position);
-          var x = Math.round(posPixel.x - (this._div.offsetWidth / 2));
-          var y = Math.round(posPixel.y - this._div.offsetHeight - 10); // 10px for anchor
-          this._div.style.left = x + "px";
-          this._div.style.top = y + "px";
+          if (this.getProjection()) {
+            var posPixel = this.getProjection().fromLatLngToDivPixel(self.position);
+            var x = Math.round(posPixel.x - (this._div.offsetWidth / 2));
+            var y = Math.round(posPixel.y - this._div.offsetHeight - 10); // 10px for anchor
+            this._div.style.left = x + "px";
+            this._div.style.top = y + "px";
+          }
         };
         this.draw = draw
         this.setPosition = draw
