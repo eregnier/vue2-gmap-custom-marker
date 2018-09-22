@@ -10,7 +10,7 @@ export default {
   props: ['marker'],
   watch: {
     marker: function (val) {
-     this.$mapPromise.then(map => this.$overlay.setPosition());
+      this.$mapPromise.then(map => this.$overlay.setPosition());
     },
   },
   provide: function () {
@@ -18,12 +18,12 @@ export default {
   },
   computed: {
     bounds () {
-      const lat = parseFloat(this.marker.latitude)
-      const lng = parseFloat(this.marker.longitude)
+      const lat = parseFloat(this.marker.lat);
+      const lng = parseFloat(this.marker.lng);
       return new google.maps.LatLngBounds(
         new google.maps.LatLng(lat, lng),
         new google.maps.LatLng(lat + 0.01, lng + 0.01)
-      )
+      );
     },
     position () {
       var self = this;
