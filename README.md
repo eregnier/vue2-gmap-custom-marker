@@ -81,10 +81,10 @@ computed: {
 }
 ```
 
- * manually specify a vertical offset value for the marker in pixels with prop `:offset`
+ * manually specify an offset value for the marker in pixels with prop `offset-x` | `offset-y`
 
  ```
- <gmap-custom-marker :offset="10"></gmap-custom-marker>
+ <gmap-custom-marker :marker="marker" :offset-x="-10" :offset-y="17.5"></gmap-custom-marker>
  ```
 
 Licence

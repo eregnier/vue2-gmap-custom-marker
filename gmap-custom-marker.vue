@@ -1,99 +1,93 @@
-<template>
-  <div>
-    <slot></slot>
-  </div>
-</template>
 <script>
-import * as VueGoogleMaps from 'vue2-google-maps';
+import * as VueGoogleMaps from 'vue2-google-maps'
 export default {
+  template: '<div><slot/></div>',
   mixins: [VueGoogleMaps.MapElementMixin],
   props: {
-    marker: Object,
-    offset: {
+    marker: {
+      type: Object,
+      default: undefined
+    },
+    offsetX: {
+      type: Number,
+      default: 0
+    },
+    offsetY: {
       type: Number,
       default: 0
     }
   },
   watch: {
-    marker: function (val) {
-     this.$mapPromise.then(map => this.$overlay.setPosition());
+    marker (val) {
+     this.$mapPromise.then(map => this.$overlay.setPosition())
     },
   },
-  provide: function () {
-    this.$mapPromise.then(map => this.$overlay = this.initOverlay(map));
-  },
-  computed: {
-    bounds () {
-      const lat = parseFloat(this.marker.lat);
-      const lng = parseFloat(this.marker.lng);
-      return new google.maps.LatLngBounds(
-        new google.maps.LatLng(lat, lng),
-        new google.maps.LatLng(lat + 0.01, lng + 0.01)
-      );
-    },
-    position () {
-      var self = this;
-      return {
-        lat () {
-          return parseFloat(self.marker.latitude);
-        },
-        lng () {
-          return parseFloat(self.marker.longitude);
-        }
-      }
-    }
-  },
-  destroyed: function() {
-    this.$overlay.setMap(null);
-    this.$overlay = undefined;
-  },
-  methods: {
-    initOverlay (map) {
+  provide () {
+    const self = this
+    this.$mapPromise.then(map => {
+      Overlay.prototype = new google.maps.OverlayView()
 
-      var self = this;
-      Overlay.prototype = new google.maps.OverlayView();
-
-      /** @constructor */
       function Overlay(map) {
-        this.setMap(map);
+        this.setMap(map)
         const draw = () => {
-          if (this.getProjection() && this._div) {
-            var posPixel = this.getProjection().fromLatLngToDivPixel(self.position);
-            var x = posPixel.x - (this._div.offsetWidth / 2);
-            var y = posPixel.y - this._div.offsetHeight - self.offset;
-            this._div.style.left = x + "px";
-            this._div.style.top = y + "px";
+          const projection = this.getProjection()
+          if (projection && self.$el) {
+            var posPixel = projection.fromLatLngToDivPixel(self.position)
+            var x = posPixel.x - (self.$el.offsetWidth / 2) + self.offsetX
+            var y = posPixel.y - self.$el.offsetHeight + self.offsetY
+            self.$el.style.left = x + "px"
+            self.$el.style.top = y + "px"
           }
-        };
+        }
         this.draw = draw
         this.setPosition = draw
       }
 
-      /**
-       * onAdd is called when the map's panes are ready and the overlay has been
-       * added to the map.
-       */
-      Overlay.prototype.onAdd = function() {
-        var div = self.$el;
-        div.style.position = 'absolute';
-        div.style.display = 'inline-block';
-        div.style.zIndex = 1000;
-        this._div = div;
-        this.visible = true;
+      Overlay.prototype.onAdd = function () {
+        const div = self.$el
+        div.style.position = 'absolute'
+        div.style.display = 'inline-block'
+        div.style.zIndex = 1000
+        this.visible = true
 
-        var panes = this.getPanes();
-        panes.overlayLayer.appendChild(div);
-        panes.overlayMouseTarget.appendChild(div);
-      };
+        var panes = this.getPanes()
+        panes.overlayLayer.appendChild(div)
+        panes.overlayMouseTarget.appendChild(div)
+      }
 
+      Overlay.prototype.onRemove = () => self.$el.remove()
 
-      Overlay.prototype.onRemove = function() {
-         this._div.remove();
-         this._div = undefined;
-      };
-
-      return new Overlay(map);
+      this.$overlay = new Overlay(map)
+    })
+  },
+  computed: {
+    bounds () {
+      return new google.maps.LatLngBounds(
+        new google.maps.LatLng(this.lat, this.lng),
+        new google.maps.LatLng(this.lat + 0.01, this.lng + 0.01)
+      )
+    },
+    lat () {
+      return parseFloat(this.marker.lat || this.marker.latitude)
+    },
+    lng () {
+      return parseFloat(this.marker.lat || this.marker.latitude)
+    },
+    position () {
+      const self = this
+      return {
+        lat () {
+          return self.lat
+        },
+        lng () {
+          return self.lng
+        }
+      }
     }
+  },
+  destroyed () {
+    this.$overlay.setMap(null)
+    this.$overlay = undefined
   }
-};
+}
 </script>
