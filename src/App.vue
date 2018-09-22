@@ -7,11 +7,15 @@
         v-for="(marker, i) in markers"
         :key="marker._id"
         :marker="marker"
+        :offset-x="-25"
+        :offset-y="-25"
         @click.native="deleteMarker(i)">
           <weather v-if="marker.weather" :coords="marker"/>
           <img v-else :title="JSON.stringify(marker)" class="icon-sm" :src="src" height="45"/>
       </gmap-custom-marker>
       <gmap-custom-marker
+        :offset-x="-171"
+        :offset-y="-75"
         key="supermarker"
         :marker="markerCenter">
         <div class="card" @click="e => e.stopPropagation()">
