@@ -46,7 +46,8 @@ components: {
   v-for="marker in places"
   :marker="marker"
   @click.native="placeClick"
-  class="">
+  :offset="10"
+  class=""
   >
       <img src="http://lorempixel.com/800/600/nature/" />
       <my-component :place="marker"></my-component>
@@ -72,13 +73,19 @@ computed: {
    places () {
       return [
         {
-          latitude: 50.60229509638775,
-          longitude: 3.0247059387528408
+          lat: 50.60229509638775,
+          lng: 3.0247059387528408
         }
       ]
    }
 }
 ```
+
+ * manually specify a vertical offset value for the marker in pixels with prop `:offset`
+
+ ```
+ <gmap-custom-marker :offset="10"></gmap-custom-marker>
+ ```
 
 Licence
 -------

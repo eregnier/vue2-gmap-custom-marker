@@ -7,7 +7,13 @@
 import * as VueGoogleMaps from 'vue2-google-maps';
 export default {
   mixins: [VueGoogleMaps.MapElementMixin],
-  props: ['marker'],
+  props: {
+    marker: Object,
+    offset: {
+      type: Number,
+      default: 0
+    }
+  },
   watch: {
     marker: function (val) {
      this.$mapPromise.then(map => this.$overlay.setPosition());
@@ -18,12 +24,12 @@ export default {
   },
   computed: {
     bounds () {
-      const lat = parseFloat(this.marker.latitude)
-      const lng = parseFloat(this.marker.longitude)
+      const lat = parseFloat(this.marker.lat);
+      const lng = parseFloat(this.marker.lng);
       return new google.maps.LatLngBounds(
         new google.maps.LatLng(lat, lng),
         new google.maps.LatLng(lat + 0.01, lng + 0.01)
-      )
+      );
     },
     position () {
       var self = this;
@@ -53,8 +59,8 @@ export default {
         const draw = () => {
           if (this.getProjection() && this._div) {
             var posPixel = this.getProjection().fromLatLngToDivPixel(self.position);
-            var x = Math.round(posPixel.x - (this._div.offsetWidth / 2));
-            var y = Math.round(posPixel.y - this._div.offsetHeight - 10); // 10px for anchor
+            var x = posPixel.x - (this._div.offsetWidth / 2);
+            var y = posPixel.y - this._div.offsetHeight - self.offset;
             this._div.style.left = x + "px";
             this._div.style.top = y + "px";
           }
