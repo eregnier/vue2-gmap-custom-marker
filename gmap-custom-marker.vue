@@ -25,11 +25,14 @@ export default {
   provide () {
     const self = this
     this.$mapPromise.then(map => {
-      Overlay.prototype = new google.maps.OverlayView()
-
-      function Overlay(map) {
-        this.setMap(map)
-        const draw = () => {
+      class Overlay extends google.maps.OverlayView {
+        constructor (map) {
+          super()
+          this.setMap(map)
+          this.draw = () => this.repaint()
+          this.setPosition = () => this.repaint()
+        }
+        repaint () {
           const projection = this.getProjection()
           if (projection && self.$el) {
             var posPixel = projection.fromLatLngToDivPixel(self.position)
@@ -39,24 +42,21 @@ export default {
             self.$el.style.top = y + "px"
           }
         }
-        this.draw = draw
-        this.setPosition = draw
+        onAdd () {
+          const div = self.$el
+          div.style.position = 'absolute'
+          div.style.display = 'inline-block'
+          div.style.zIndex = 1000
+          this.visible = true
+
+          var panes = this.getPanes()
+          panes.overlayLayer.appendChild(div)
+          panes.overlayMouseTarget.appendChild(div)
+        }
+        onRemove () {
+          self.$el.remove()
+        }
       }
-
-      Overlay.prototype.onAdd = function () {
-        const div = self.$el
-        div.style.position = 'absolute'
-        div.style.display = 'inline-block'
-        div.style.zIndex = 1000
-        this.visible = true
-
-        var panes = this.getPanes()
-        panes.overlayLayer.appendChild(div)
-        panes.overlayMouseTarget.appendChild(div)
-      }
-
-      Overlay.prototype.onRemove = () => self.$el.remove()
-
       this.$overlay = new Overlay(map)
     })
   },
@@ -71,7 +71,7 @@ export default {
       return parseFloat(this.marker.lat || this.marker.latitude)
     },
     lng () {
-      return parseFloat(this.marker.lat || this.marker.latitude)
+      return parseFloat(this.marker.lng || this.marker.longitude)
     },
     position () {
       const self = this
