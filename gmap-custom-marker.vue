@@ -1,7 +1,7 @@
+<template><div><slot/></div></template>
 <script>
 import * as VueGoogleMaps from 'vue2-google-maps'
 export default {
-  template: '<div><slot/></div>',
   mixins: [VueGoogleMaps.MapElementMixin],
   props: {
     marker: {
@@ -35,21 +35,17 @@ export default {
         repaint () {
           const projection = this.getProjection()
           if (projection && self.$el) {
-            var posPixel = projection.fromLatLngToDivPixel(self.position)
-            var x = posPixel.x - (self.$el.offsetWidth / 2) + self.offsetX
-            var y = posPixel.y - self.$el.offsetHeight + self.offsetY
-            self.$el.style.left = x + "px"
-            self.$el.style.top = y + "px"
+            const posPixel = projection.fromLatLngToDivPixel(self.position)
+            self.$el.style.left = (posPixel.x + self.offsetX) + 'px'
+            self.$el.style.top = (posPixel.y + self.offsetY) + 'px'
           }
         }
         onAdd () {
           const div = self.$el
+          const panes = this.getPanes()
           div.style.position = 'absolute'
           div.style.display = 'inline-block'
-          div.style.zIndex = 1000
-          this.visible = true
-
-          var panes = this.getPanes()
+          div.style.zIndex = 50
           panes.overlayLayer.appendChild(div)
           panes.overlayMouseTarget.appendChild(div)
         }
@@ -61,12 +57,6 @@ export default {
     })
   },
   computed: {
-    bounds () {
-      return new google.maps.LatLngBounds(
-        new google.maps.LatLng(this.lat, this.lng),
-        new google.maps.LatLng(this.lat + 0.01, this.lng + 0.01)
-      )
-    },
     lat () {
       return parseFloat(this.marker.lat || this.marker.latitude)
     },
