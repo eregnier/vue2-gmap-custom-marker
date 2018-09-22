@@ -51,7 +51,7 @@ export default {
       function Overlay(map) {
         this.setMap(map);
         const draw = () => {
-          if (this.getProjection()) {
+          if (this.getProjection() && this._div) {
             var posPixel = this.getProjection().fromLatLngToDivPixel(self.position);
             var x = Math.round(posPixel.x - (this._div.offsetWidth / 2));
             var y = Math.round(posPixel.y - this._div.offsetHeight - 10); // 10px for anchor
@@ -82,7 +82,8 @@ export default {
 
 
       Overlay.prototype.onRemove = function() {
-      	this._div = undefined;
+         this._div.remove();
+         this._div = undefined;
       };
 
       return new Overlay(map);
