@@ -1,94 +1,112 @@
-Custom marker component for vue 2 js google map
------------------------------------------------
+# vue2-gmap-custom-marker
 
-Demo
-----
+This component allows you to display custom HTML content on the map using Overlay.
+This component is an adaptation of the Google Map V3 overlay code sample with some great ideas from [angularjs google map](https://ngmap.github.io/) from this [component](https://github.com/allenhwkim/angularjs-google-maps/blob/master/directives/custom-marker.js).
 
-[demo from gh-pages branch](https://eregnier.github.io/vue2-gmap-custom-marker/dist/)
+This project is a plugin for [vue-google-maps](https://github.com/xkjyeah/vue-google-maps).
 
-`npm i vue2-gmap-custom-marker`
+# Demo
 
-https://www.npmjs.com/package/vue2-gmap-custom-marker
+[Demo from gh-pages branch](https://eregnier.github.io/vue2-gmap-custom-marker/dist/)
 
-This component let user display custom html content on the map using Overlay.
-This component is an adaptation of the google map V3 overlay code sample with some great ideas from angularjs google map https://ngmap.github.io/ from this component https://github.com/allenhwkim/angularjs-google-maps/blob/master/directives/custom-marker.js
-
-This project is a plugin for https://github.com/xkjyeah/vue-google-maps
-
-Sample
-------
+## Example
 
 ![custom markers on vue google map](sample.png)
 
-How to
-------
+# Installation
 
-Here is how to use this component
+Install the package from [npm](https://www.npmjs.com/package/vue2-gmap-custom-marker):
 
- * import the component and use it in your own vue map component
+`npm i vue2-gmap-custom-marker`
 
+# Basic Usage
 
+Import the component and use it in the components object.
 
-```
+```javascript
 import GmapCustomMarker from 'vue2-gmap-custom-marker';
 
-[...]
-
-components: {
-    'gmap-custom-marker': GmapCustomMarker
-},
+export default = {
+  [...],
+  components: {
+      'gmap-custom-marker': GmapCustomMarker
+  },
+  [...]
+}
 ```
 
+Use the custom marker inside the map component. Add HTML or other Vue components inside the custom marker to be rendered on the map.
 
+```vue
+<GmapMap>
+  <gmap-custom-marker :marker="marker">
+    <img src="http://lorempixel.com/800/600/nature/" />
+    <my-component></my-component>
+  </gmap-custom-marker>
+</GmapMap>
+
+<script>
+export default = {
+  [...],
+  data() {
+    return {
+      marker: { 
+        lat: 50.60229509638775,
+        lng: 3.0247059387528408
+      }
+    }
+  [...]
+}
+</script>
 ```
-<gmap-custom-marker
-  :key="marker.id + (selectedMarker.id === marker.id ? '-force-refresh' : 0)"
-  v-for="marker in places"
-  :marker="marker"
-  @click.native="placeClick"
-  :offset="10"
-  class=""
+
+Use the `@click` event with the `.native` modifier to bind a function to the clicking of the custom marker.
+
+```vue
+<GmapMap>
+  <gmap-custom-marker 
+    :marker="{ lat: 50.60229509638775, lng: 3.0247059387528408 }"
+    @click.native="someFunction"
   >
-      <img src="http://lorempixel.com/800/600/nature/" />
-      <my-component :place="marker"></my-component>
+    <img src="http://lorempixel.com/800/600/nature/" />
+    <my-component></my-component>
+  </gmap-custom-marker>
+</GmapMap>
+```
+
+Specify the alignment of the marker with the `alignment` prop. Accepts 13 values: `top`, `bottom`, `left`, `right`, `center`, `topleft` | `lefttop`, `topright` | `righttop`, `bottomleft` | `leftbottom`, `bottomright` | `rightbottom`. Defines the alignment of the marker relative to the lat/lng specified, e.g. `bottomright` - the marker will be below and on the right of the location.
+
+ ```vue
+ <gmap-custom-marker
+  :marker="marker"
+  alignment="bottomright"
+>
 </gmap-custom-marker>
-```
-
-At the moment, the component api looks like :
-
-  * handles click callback and give as first argument the given prop `:marker`
-
-```
-methods: {
-   placeClick (marker) {
-       console.log('this marker was clicked', marker)
-   }
-}
-```
-
- * display places depending on their lng lat values
-
-```
-computed: {
-   places () {
-      return [
-        {
-          lat: 50.60229509638775,
-          lng: 3.0247059387528408
-        }
-      ]
-   }
-}
-```
-
- * manually specify an offset value for the marker in pixels with prop `offset-x` | `offset-y`
-
- ```
- <gmap-custom-marker :marker="marker" :offset-x="-10" :offset-y="17.5"></gmap-custom-marker>
  ```
 
-Licence
--------
+ ![custom markers on vue google map](alignment.png)
 
-MIT
-https://en.wikipedia.org/wiki/MIT_License
+
+Manually specify an offset value for the marker in pixels with prop `offsetX` | `offsetY`. A positive `offsetX` moves the marker further right, and a positive `offsetY` moves the marker further down the page. Can be used with the `alignment` prop.
+
+ ```vue
+ <gmap-custom-marker
+  :marker="marker"
+  :offsetX="-10"
+  :offsetY="17.5"
+>
+</gmap-custom-marker>
+ ```
+
+# Reference
+
+**Prop**|**Type**|**Default**|**Description**|**Supported Values**
+:-----:|:-----:|:-----:|:-----:|:-----:
+`marker`|Object|`null`|Provide the latitude and longitude values that the marker should be displayed at. **Required**|Provide an Object with `lat` and `lng` properties. `{ lat: Number, lng: Number }`
+`offsetX`|Number|`0`|The number of pixels to move the marker by in the x-direction. Postive values move the marker to the right|Positive or negative number.
+`offsetY`|Number|`0`|The number of pixels to move the marker by in the y-direction. Postive values move the marker to down the page.|Positive or negative number.
+`alignment`|String|`top`|The alignment of the marker element relative to the location it is displayed. e.g. `bottomright` - the marker will be below and on the right of the location.|`top`, `bottom`, `left`, `right`, `center`, `topleft`  `lefttop`, `topright`, `righttop`, `bottomleft`, `leftbottom`, `bottomright`, `rightbottom`
+
+# Licence
+
+[MIT](https://en.wikipedia.org/wiki/MIT_License)
