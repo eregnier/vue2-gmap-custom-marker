@@ -23,6 +23,10 @@ export default {
     alignment: {
       type: String,
       default: "top"
+    },
+    zIndex: {
+      type: Number,
+      default: 50
     }
   },
   data () {
@@ -110,7 +114,7 @@ export default {
           const panes = this.getPanes()
           div.style.position = 'absolute'
           div.style.display = 'inline-block'
-          div.style.zIndex = 50
+          div.style.zIndex = self.zIndex
           panes.overlayLayer.appendChild(div)
           panes.overlayMouseTarget.appendChild(div)
         }
