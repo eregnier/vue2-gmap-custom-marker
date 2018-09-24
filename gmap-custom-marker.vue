@@ -15,11 +15,15 @@ export default {
     offsetY: {
       type: Number,
       default: 0
+    },
+    alignment: {
+      type: String,
+      default: "top"
     }
   },
   watch: {
     marker (val) {
-     this.$mapPromise.then(map => this.$overlay.setPosition())
+      this.$mapPromise.then(map => this.$overlay.setPosition())
     },
   },
   provide () {
@@ -33,11 +37,59 @@ export default {
           this.setPosition = () => this.repaint()
         }
         repaint () {
+          const div = self.$el
           const projection = this.getProjection()
-          if (projection && self.$el) {
+          if (projection && div) {
             const posPixel = projection.fromLatLngToDivPixel(self.position)
-            self.$el.style.left = (posPixel.x + self.offsetX) + 'px'
-            self.$el.style.top = (posPixel.y + self.offsetY) + 'px'
+            let x, y
+            switch (self.alignment) {
+              case "top":
+                x = posPixel.x - (div.offsetWidth / 2)
+                y = posPixel.y - div.offsetHeight
+                break
+              case "bottom":
+                x = posPixel.x - (div.offsetWidth / 2)
+                y = posPixel.y
+                break
+              case "left":
+                x = posPixel.x - div.offsetWidth
+                y = posPixel.y - (div.offsetHeight / 2)
+                break
+              case "right":
+                x = posPixel.x
+                y = posPixel.y - (div.offsetHeight / 2)
+                break
+              case "center":
+              case "centre":
+                x = posPixel.x - (div.offsetWidth / 2)
+                y = posPixel.y - (div.offsetHeight / 2)
+                break
+              case "topleft":
+              case "lefttop":
+                x = posPixel.x - div.offsetWidth
+                y = posPixel.y - div.offsetHeight
+                break
+              case "topright":
+              case "righttop":
+                x = posPixel.x
+                y = posPixel.y - div.offsetHeight
+                break
+              case "bottomleft":
+              case "leftop":
+                x = posPixel.x - div.offsetWidth
+                y = posPixel.y
+                break
+              case "bottomright":
+              case "rightbottom":
+                x = posPixel.x
+                y = posPixel.y
+                break
+              default:
+                throw new Error("Invalid alignment type of custom marker!")
+                break
+              }
+            div.style.left = (x + self.offsetX) + 'px'
+            div.style.top = (y + self.offsetY) + 'px'
           }
         }
         onAdd () {
