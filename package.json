@@ -11,7 +11,7 @@
     "axios": "^0.18.0",
     "eslint-plugin-vue": "^4.7.1",
     "vue": "^2.5.17",
-    "vue2-gmap-custom-marker": "^5.2.0",
+    "vue2-gmap-custom-marker": "^5.3.0",
     "vue2-google-maps": "^0.10.2"
   },
   "devDependencies": {

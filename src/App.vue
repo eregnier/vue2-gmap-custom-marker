@@ -2,20 +2,39 @@
   <div id="app">
     <button class="button" :style="{'background-color': addMode ? '#66f13d' : '#3d66f1'}" @click="addMode=true">{{ addMode ? 'Click on the map' : '+ Add marker' }}</button>
     <button class="button weather" :style="{'background-color': addWeather ? '#6f163d' : '#6d63f1'}" @click="addWeather=!addWeather">{{ addWeather ? 'Weather marker' : 'Icon Marker' }}</button>
+    <table class="alignment">
+      <tr>
+        <td colspan="3">Marker alignment : {{alignment}}</td>
+      </tr>
+      <tr>
+        <td><button @click="alignment='topleft'">topleft</button></td>
+        <td><button @click="alignment='top'">top</button></td>
+        <td><button @click="alignment='topright'">topright</button></td>
+      </tr>
+      <tr>
+        <td><button @click="alignment='left'">left</button></td>
+        <td><button @click="alignment='center'">center</button></td>
+        <td><button @click="alignment='right'">right</button></td>
+      </tr>
+      <tr>
+        <td><button @click="alignment='bottomleft'">bottomleft</button></td>
+        <td><button @click="alignment='bottom'">bottom</button></td>
+        <td><button @click="alignment='bottomright'">bottomright</button></td>
+      </tr>
+    </table>
     <vue-gmap :center="{lat: 50.6272265, lng: 3.0571581}" :zoom="12" style="width: 100%; height: 600px" @click="onMapClick">
       <gmap-custom-marker
         v-for="(marker, i) in markers"
         :key="marker._id"
+        :delayRepaint="marker.weather ? 250 : 0"
         :marker="marker"
-        :offset-x="-25"
-        :offset-y="-25"
+        :alignment="marker.alignment"
         @click.native="deleteMarker(i)">
           <weather v-if="marker.weather" :coords="marker"/>
           <img v-else :title="JSON.stringify(marker)" class="icon-sm" :src="src" height="45"/>
       </gmap-custom-marker>
       <gmap-custom-marker
-        :offset-x="-171"
-        :offset-y="-75"
+        alignment="bottomright"
         key="supermarker"
         :marker="markerCenter">
         <div class="card" @click="e => e.stopPropagation()">
@@ -55,7 +74,8 @@ export default {
       addWeather: false,
       addMode: false,
       markers: [],
-      ids:0
+      ids:0,
+      alignment: 'top'
     }
   },
   computed: {
@@ -73,7 +93,8 @@ export default {
           _id: this.ids++,
           latitude: event.latLng.lat(),
           longitude: event.latLng.lng(),
-          weather: this.addWeather
+          weather: this.addWeather,
+          alignment: this.alignment
         })
         this.addMode = false;
       }
@@ -96,6 +117,24 @@ export default {
 }
 .icon {
   margin-left: 15px;
+}
+.alignment button {
+  color: #555;
+  width:80px;
+  padding: 5px;
+  border: 1px solid #aaa;
+  border-radius: 5px;
+}
+
+.alignment {
+  right: 10px;
+  position: absolute;
+  z-index: 1000;
+  background-color: white;
+  padding: 4px;
+  top: 15px;
+  border: 1px solid #555;
+  border-radius: 5px;
 }
 .button {
   position: absolute;
