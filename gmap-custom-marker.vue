@@ -1,9 +1,13 @@
-<template><div><slot/></div></template>
+<template><div :style="{opacity: opacity}"><slot/></div></template>
 <script>
 import * as VueGoogleMaps from 'vue2-google-maps'
 export default {
   mixins: [VueGoogleMaps.MapElementMixin],
   props: {
+    delayRepaint: {
+      type: Number,
+      default: undefined
+    },
     marker: {
       type: Object,
       default: undefined
@@ -19,6 +23,11 @@ export default {
     alignment: {
       type: String,
       default: "top"
+    }
+  },
+  data () {
+    return {
+      opacity: 0.01
     }
   },
   watch: {
@@ -43,6 +52,10 @@ export default {
             const posPixel = projection.fromLatLngToDivPixel(self.position)
             let x, y
             switch (self.alignment) {
+              case "center":
+                x = posPixel.x - (div.offsetWidth / 2)
+                y = posPixel.y - (div.offsetHeight / 2)
+                break
               case "top":
                 x = posPixel.x - (div.offsetWidth / 2)
                 y = posPixel.y - div.offsetHeight
@@ -106,6 +119,14 @@ export default {
         }
       }
       this.$overlay = new Overlay(map)
+      if (this.delayRepaint) {
+        setTimeout(() => {
+          this.$overlay.repaint()
+          this.opacity = 1
+        }, this.delayRepaint)
+      } else {
+        this.opacity = 1
+      }
     })
   },
   computed: {
