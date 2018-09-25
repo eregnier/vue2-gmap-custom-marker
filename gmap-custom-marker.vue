@@ -52,10 +52,6 @@ export default {
             const posPixel = projection.fromLatLngToDivPixel(self.position)
             let x, y
             switch (self.alignment) {
-              case "center":
-                x = posPixel.x - (div.offsetWidth / 2)
-                y = posPixel.y - (div.offsetHeight / 2)
-                break
               case "top":
                 x = posPixel.x - (div.offsetWidth / 2)
                 y = posPixel.y - div.offsetHeight
@@ -73,7 +69,6 @@ export default {
                 y = posPixel.y - (div.offsetHeight / 2)
                 break
               case "center":
-              case "centre":
                 x = posPixel.x - (div.offsetWidth / 2)
                 y = posPixel.y - (div.offsetHeight / 2)
                 break
