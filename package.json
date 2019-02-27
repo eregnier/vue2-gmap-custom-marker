@@ -1,6 +1,6 @@
 {
   "name": "vue2-gmap-custom-marker",
-  "version": "5.3.1",
+  "version": "5.3.2",
   "description": "vue 2 google map custom marker component allowing display custom html content on google map using vue2-google-maps",
   "main": "gmap-custom-marker.vue",
   "scripts": {
@@ -25,7 +25,6 @@
   },
   "homepage": "https://github.com/eregnier/vue2-gmap-custom-marker#readme",
   "dependencies": {
-    "underscore": "^1.9.1",
     "vue": "^2.5.17",
     "vue2-google-maps": "^0.10.2"
   }
