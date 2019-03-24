@@ -1,6 +1,10 @@
-<template><div :style="{opacity: opacity}"><slot/></div></template>
+<template>
+  <div :style="{opacity: opacity}">
+    <slot/>
+  </div>
+</template>
 <script>
-import * as VueGoogleMaps from 'vue2-google-maps'
+import * as VueGoogleMaps from "vue2-google-maps";
 export default {
   mixins: [VueGoogleMaps.MapElementMixin],
   props: {
@@ -29,127 +33,127 @@ export default {
       default: 50
     }
   },
-  data () {
+  data() {
     return {
       opacity: 0.01
-    }
+    };
   },
   watch: {
-    marker (val) {
-      this.$mapPromise.then(map => this.$overlay.setPosition())
-    },
-  },
-  provide () {
-    const self = this
-    this.$mapPromise.then(map => {
-      class Overlay extends google.maps.OverlayView {
-        constructor (map) {
-          super()
-          this.setMap(map)
-          this.draw = () => this.repaint()
-          this.setPosition = () => this.repaint()
-        }
-        repaint () {
-          const div = self.$el
-          const projection = this.getProjection()
-          if (projection && div) {
-            const posPixel = projection.fromLatLngToDivPixel(self.position)
-            let x, y
-            switch (self.alignment) {
-              case "top":
-                x = posPixel.x - (div.offsetWidth / 2)
-                y = posPixel.y - div.offsetHeight
-                break
-              case "bottom":
-                x = posPixel.x - (div.offsetWidth / 2)
-                y = posPixel.y
-                break
-              case "left":
-                x = posPixel.x - div.offsetWidth
-                y = posPixel.y - (div.offsetHeight / 2)
-                break
-              case "right":
-                x = posPixel.x
-                y = posPixel.y - (div.offsetHeight / 2)
-                break
-              case "center":
-                x = posPixel.x - (div.offsetWidth / 2)
-                y = posPixel.y - (div.offsetHeight / 2)
-                break
-              case "topleft":
-              case "lefttop":
-                x = posPixel.x - div.offsetWidth
-                y = posPixel.y - div.offsetHeight
-                break
-              case "topright":
-              case "righttop":
-                x = posPixel.x
-                y = posPixel.y - div.offsetHeight
-                break
-              case "bottomleft":
-              case "leftop":
-                x = posPixel.x - div.offsetWidth
-                y = posPixel.y
-                break
-              case "bottomright":
-              case "rightbottom":
-                x = posPixel.x
-                y = posPixel.y
-                break
-              default:
-                throw new Error("Invalid alignment type of custom marker!")
-                break
-              }
-            div.style.left = (x + self.offsetX) + 'px'
-            div.style.top = (y + self.offsetY) + 'px'
-          }
-        }
-        onAdd () {
-          const div = self.$el
-          const panes = this.getPanes()
-          div.style.position = 'absolute'
-          div.style.display = 'inline-block'
-          div.style.zIndex = self.zIndex
-          panes.overlayLayer.appendChild(div)
-          panes.overlayMouseTarget.appendChild(div)
-        }
-        onRemove () {
-          self.$el.remove()
-        }
-      }
-      this.$overlay = new Overlay(map)
-      if (this.delayRepaint) {
-        setTimeout(() => {
-          this.$overlay.repaint()
-          this.opacity = 1
-        }, this.delayRepaint)
-      } else {
-        this.opacity = 1
-      }
-    })
-  },
-  computed: {
-    lat () {
-      return parseFloat(this.marker.lat || this.marker.latitude)
-    },
-    lng () {
-      return parseFloat(this.marker.lng || this.marker.longitude)
-    },
-    position () {
-      const self = this
-      return {
-        lat () {
-          return self.lat
-        },
-        lng () {
-          return self.lng
-        }
-      }
+    marker(val) {
+      this.$mapPromise.then(map => this.$overlay.setPosition());
     }
   },
-  destroyed () {
-    this.$overlay.setMap(null)
-    this.$overlay = undefined
+  provide() {
+    const self = this;
+    this.$mapPromise.then(map => {
+      class Overlay extends google.maps.OverlayView {
+        constructor(map) {
+          super();
+          this.setMap(map);
+          this.draw = () => this.repaint();
+          this.setPosition = () => this.repaint();
+        }
+        repaint() {
+          const div = self.$el;
+          const projection = this.getProjection();
+          if (projection && div) {
+            const posPixel = projection.fromLatLngToDivPixel(self.position);
+            let x, y;
+            switch (self.alignment) {
+              case "top":
+                x = posPixel.x - div.offsetWidth / 2;
+                y = posPixel.y - div.offsetHeight;
+                break;
+              case "bottom":
+                x = posPixel.x - div.offsetWidth / 2;
+                y = posPixel.y;
+                break;
+              case "left":
+                x = posPixel.x - div.offsetWidth;
+                y = posPixel.y - div.offsetHeight / 2;
+                break;
+              case "right":
+                x = posPixel.x;
+                y = posPixel.y - div.offsetHeight / 2;
+                break;
+              case "center":
+                x = posPixel.x - div.offsetWidth / 2;
+                y = posPixel.y - div.offsetHeight / 2;
+                break;
+              case "topleft":
+              case "lefttop":
+                x = posPixel.x - div.offsetWidth;
+                y = posPixel.y - div.offsetHeight;
+                break;
+              case "topright":
+              case "righttop":
+                x = posPixel.x;
+                y = posPixel.y - div.offsetHeight;
+                break;
+              case "bottomleft":
+              case "leftop":
+                x = posPixel.x - div.offsetWidth;
+                y = posPixel.y;
+                break;
+              case "bottomright":
+              case "rightbottom":
+                x = posPixel.x;
+                y = posPixel.y;
+                break;
+              default:
+                throw new Error("Invalid alignment type of custom marker!");
+                break;
+            }
+            div.style.left = x + self.offsetX + "px";
+            div.style.top = y + self.offsetY + "px";
+          }
+        }
+        onAdd() {
+          const div = self.$el;
+          const panes = this.getPanes();
+          div.style.position = "absolute";
+          div.style.display = "inline-block";
+          div.style.zIndex = self.zIndex;
+          panes.overlayLayer.appendChild(div);
+          panes.overlayMouseTarget.appendChild(div);
+        }
+        onRemove() {
+          self.$el.remove();
+        }
+      }
+      this.$overlay = new Overlay(map);
+      if (this.delayRepaint) {
+        setTimeout(() => {
+          this.$overlay.repaint();
+          this.opacity = 1;
+        }, this.delayRepaint);
+      } else {
+        this.opacity = 1;
+      }
+    });
+  },
+  computed: {
+    lat() {
+      return parseFloat(this.marker.lat || this.marker.latitude);
+    },
+    lng() {
+      return parseFloat(this.marker.lng || this.marker.longitude);
+    },
+    position() {
+      const self = this;
+      return {
+        lat() {
+          return self.lat;
+        },
+        lng() {
+          return self.lng;
+        }
+      };
+    }
+  },
+  destroyed() {
+    this.$overlay.setMap(null);
+    this.$overlay = undefined;
   }
-}
+};
 </script>
