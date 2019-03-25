@@ -12,7 +12,7 @@
     "eslint-plugin-vue": "^5.2.2",
     "marker-clusterer-plus": "^2.1.4",
     "vue": "^2.6.7",
-    "vue2-gmap-custom-marker": "^5.3.3",
+    "vue2-gmap-custom-marker": "^5.4.3",
     "vue2-google-maps": "^0.10.6"
   },
   "devDependencies": {
