@@ -33,6 +33,28 @@ export default {
       default: 50
     }
   },
+  inject: {
+    $clusterPromise: {
+      default: null
+    }
+  },
+  beforeCreate(options) {
+    if (this.$clusterPromise) {
+      options.map = null;
+    }
+
+    return this.$clusterPromise;
+  },
+  methods: {
+    afterCreate(inst) {
+      if (this.$clusterPromise) {
+        this.$clusterPromise.then(co => {
+          co.addMarker(inst);
+          this.$clusterObject = co;
+        });
+      }
+    }
+  },
   data() {
     return {
       opacity: 0.01
@@ -45,7 +67,7 @@ export default {
   },
   provide() {
     const self = this;
-    this.$mapPromise.then(map => {
+    return this.$mapPromise.then(map => {
       class Overlay extends google.maps.OverlayView {
         constructor(map) {
           super();
@@ -116,6 +138,11 @@ export default {
           div.style.zIndex = self.zIndex;
           panes.overlayLayer.appendChild(div);
           panes.overlayMouseTarget.appendChild(div);
+          this.getDraggable = () => false;
+          this.getPosition = () => {
+            return new google.maps.LatLng(self.lat, self.lng);
+          };
+          self.afterCreate(this);
         }
         onRemove() {
           self.$el.remove();
