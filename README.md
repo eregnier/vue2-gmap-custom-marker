@@ -84,6 +84,8 @@ Specify the alignment of the marker with the `alignment` prop. Accepts 13 values
 </gmap-custom-marker>
  ```
 
+This component now supports cluster markers and works like normal vue gmap clusters (since v5.4.3)
+
  ![custom markers on vue google map](alignment.png)
 
 
