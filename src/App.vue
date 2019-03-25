@@ -54,7 +54,7 @@
       style="width: 100%; height: 600px"
       @click="onMapClick"
     >
-      <gmap-cluster>
+      <cluster>
         <gmap-custom-marker
           v-for="(marker, i) in markers"
           :key="marker._id"
@@ -66,8 +66,7 @@
           <weather v-if="marker.weather" :coords="marker"/>
           <img v-else :title="JSON.stringify(marker)" class="icon-sm" :src="src" height="45">
         </gmap-custom-marker>
-      </gmap-cluster>
-
+      </cluster>
       <gmap-custom-marker alignment="bottomright" key="supermarker" :marker="markerCenter">
         <div class="card" @click="e => e.stopPropagation()">
           <small>This is a marker</small>
@@ -98,10 +97,28 @@ export default {
   },
   data() {
     return {
+      mas: [
+        {
+          lat: 50.6272265,
+          lng: 3.0571581
+        },
+        {
+          lat: 50.6373265,
+          lng: 3.0571581
+        },
+        {
+          lat: 50.6474265,
+          lng: 3.0571581
+        },
+        {
+          lat: 50.6575265,
+          lng: 3.0571581
+        }
+      ],
       testText: "",
       markerCenter: {
-        latitude: 50.6272265,
-        longitude: 3.0571581
+        lat: 50.6272265,
+        lng: 3.0571581
       },
       addWeather: false,
       addMode: false,
