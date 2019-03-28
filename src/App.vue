@@ -49,7 +49,7 @@
       </tr>
     </table>
     <vue-gmap
-      :center="{lat: 50.6272265, lng: 3.0571581}"
+      :center="markerCenter"
       :zoom="12"
       style="width: 100%; height: 600px"
       @click="onMapClick"
@@ -97,24 +97,6 @@ export default {
   },
   data() {
     return {
-      mas: [
-        {
-          lat: 50.6272265,
-          lng: 3.0571581
-        },
-        {
-          lat: 50.6373265,
-          lng: 3.0571581
-        },
-        {
-          lat: 50.6474265,
-          lng: 3.0571581
-        },
-        {
-          lat: 50.6575265,
-          lng: 3.0571581
-        }
-      ],
       testText: "",
       markerCenter: {
         lat: 50.6272265,
