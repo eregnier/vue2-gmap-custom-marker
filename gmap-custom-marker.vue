@@ -161,10 +161,14 @@ export default {
   },
   computed: {
     lat() {
-      return parseFloat(this.marker.lat || this.marker.latitude);
+      return parseFloat(
+        isNaN(this.marker.lat) ? this.marker.latitude : this.marker.lat
+      );
     },
     lng() {
-      return parseFloat(this.marker.lng || this.marker.longitude);
+      return parseFloat(
+        isNaN(this.marker.lng) ? this.marker.longitude : this.marker.lng
+      );
     },
     position() {
       const self = this;
