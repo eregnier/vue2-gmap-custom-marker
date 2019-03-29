@@ -50,7 +50,7 @@
     </table>
     <vue-gmap
       :center="markerCenter"
-      :zoom="12"
+      :zoom="10"
       style="width: 100%; height: 600px"
       @click="onMapClick"
     >
@@ -80,6 +80,26 @@
           </div>
         </div>
       </gmap-custom-marker>
+      <gmap-custom-marker :z-index="zA" :marker="{lat: 50.4272265, lng: 2.95}">
+        <div class="zindex zindex-a">
+          <center>
+            <p>z-index live edit A</p>
+            <p>{{zA}}</p>
+            <button @click="zA++">+</button>
+            <button @click="zA--">-</button>
+          </center>
+        </div>
+      </gmap-custom-marker>
+      <gmap-custom-marker :z-index="zB" :marker="{lat: 50.4272265, lng: 2.80}">
+        <div class="zindex zindex-b">
+          <center>
+            <p>z-index live edit B</p>
+            <p>{{zB}}</p>
+            <button @click="zB++">+</button>
+            <button @click="zB--">-</button>
+          </center>
+        </div>
+      </gmap-custom-marker>
     </vue-gmap>
   </div>
 </template>
@@ -97,6 +117,8 @@ export default {
   },
   data() {
     return {
+      zA: 50,
+      zB: 51,
       testText: "",
       markerCenter: {
         lat: 50.6272265,
@@ -137,6 +159,20 @@ export default {
 </script>
 
 <style>
+.zindex {
+  padding: 5px;
+  border: 1px solid #aaa;
+  border-radius: 4px;
+  box-shadow: 3px 3px 3px grey;
+  min-height: 100px;
+  min-width: 100px;
+}
+.zindex-a {
+  background-color: #bbdddd;
+}
+.zindex-b {
+  background-color: #ddbbdd;
+}
 .card {
   background-color: #efefef;
   padding: 15px;
