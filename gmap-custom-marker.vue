@@ -128,6 +128,7 @@ export default {
             }
             div.style.left = x + self.offsetX + "px";
             div.style.top = y + self.offsetY + "px";
+            div.style["z-index"] = self.zIndex;
           }
         }
         onAdd() {
