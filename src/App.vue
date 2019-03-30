@@ -153,7 +153,8 @@ export default {
   },
   data() {
     return {
-      html: "<center><h2>This is <u>live</u> html marker 🔥</h2></center>",
+      html:
+        '<center><h2>This is <u>live</u> html marker 🔥</h2></center> <iframe width="330" height="170" src="https://www.youtube.com/embed/RySHDUU2juM" frameborder="0" allow="accelerometer; autoplay; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>',
       infinite: true,
       selectedAnimation: "",
       zA: 50,
