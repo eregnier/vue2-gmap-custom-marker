@@ -12,7 +12,9 @@
     >{{ addWeather ? 'Weather marker' : 'Icon Marker' }}</button>
     <table class="alignment">
       <tr>
-        <td colspan="3">Marker alignment : {{alignment}}</td>
+        <td colspan="3">
+          <center>Marker alignment : {{alignment}}</center>
+        </td>
       </tr>
       <tr>
         <td>
@@ -48,6 +50,25 @@
         </td>
       </tr>
     </table>
+    <div class="animate-panel">
+      <center>
+        <label>
+          <a href="https://daneden.github.io/animate.css/">Animate.css</a> type
+        </label>
+        <br>
+        <br>
+        <select v-model="selectedAnimation">
+          <option v-for="animation in animations" :key="animation">{{animation}}</option>
+        </select>
+        <br>
+        <br>
+        <label>infinite animation</label>
+        <button @click="infinite=!infinite">
+          <span v-if="infinite">ON</span>
+          <span v-else>OFF</span>
+        </button>
+      </center>
+    </div>
     <vue-gmap
       :center="markerCenter"
       :zoom="12"
@@ -64,7 +85,14 @@
           @click.native="deleteMarker(i)"
         >
           <weather v-if="marker.weather" :coords="marker"/>
-          <img v-else :title="JSON.stringify(marker)" class="icon-sm" :src="src" height="45">
+          <img
+            :class="animation"
+            v-else
+            :title="JSON.stringify(marker)"
+            class="icon-sm"
+            :src="src"
+            height="45"
+          >
         </gmap-custom-marker>
       </cluster>
       <gmap-custom-marker alignment="bottomright" key="supermarker" :marker="markerCenter">
@@ -73,7 +101,7 @@
           <center>
             <p>{{markerCenter}}</p>
           </center>
-          <img class="icon" :src="src" height="75">
+          <img :class="animation" class="icon" :src="src" height="75">
           <div class="input-group">
             <label>Image url</label>
             <input type="input" v-model="testText">
@@ -97,6 +125,8 @@ export default {
   },
   data() {
     return {
+      infinite: true,
+      selectedAnimation: "",
       testText: "",
       markerCenter: {
         lat: 50.6272265,
@@ -106,10 +136,15 @@ export default {
       addMode: false,
       markers: [],
       ids: 0,
-      alignment: "top"
+      alignment: "top",
+      animations: require("./animations.json")
     };
   },
   computed: {
+    animation() {
+      const infinite = this.infinite ? "infinite" : "";
+      return `animated ${infinite} ${this.selectedAnimation}`;
+    },
     src() {
       return this.testText
         ? this.testText
@@ -137,6 +172,10 @@ export default {
 </script>
 
 <style>
+@import "https://cdnjs.cloudflare.com/ajax/libs/animate.css/3.7.0/animate.min.css";
+* {
+  font-family: sans-serif;
+}
 .card {
   background-color: #efefef;
   padding: 15px;
@@ -166,7 +205,7 @@ export default {
   background-color: white;
   padding: 4px;
   top: 15px;
-  border: 1px solid #555;
+  border: 1px solid #ccc;
   border-radius: 5px;
 }
 .button {
@@ -188,5 +227,17 @@ export default {
 .icon-sm {
   padding: 3px;
   border-radius: 4px;
+}
+.animate-panel {
+  padding: 7px;
+  position: absolute;
+  right: 10px;
+  top: 150px;
+  border-radius: 7px;
+  background-color: #fafafa;
+  height: 100px;
+  width: 250px;
+  z-index: 1000;
+  border: 1px solid #ccc;
 }
 </style>
