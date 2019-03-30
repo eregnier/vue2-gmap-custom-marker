@@ -69,6 +69,9 @@
         </button>
       </center>
     </div>
+    <div class="live-editor">
+      <textarea v-model="html"></textarea>
+    </div>
     <vue-gmap :center="markerCenter" :zoom="10" style="width: 100%" @click="onMapClick">
       <cluster>
         <gmap-custom-marker
@@ -130,6 +133,9 @@
           </center>
         </div>
       </gmap-custom-marker>
+      <gmap-custom-marker alignment="center" :marker="{lat: 50.7, lng: 3.8}">
+        <div class="live-html" v-html="html"></div>
+      </gmap-custom-marker>
     </vue-gmap>
   </div>
 </template>
@@ -147,6 +153,7 @@ export default {
   },
   data() {
     return {
+      html: "<center><h2>This is <u>live</u> html marker 🔥</h2></center>",
       infinite: true,
       selectedAnimation: "",
       zA: 50,
@@ -208,6 +215,15 @@ body,
 * {
   font-family: sans-serif;
   color: #444;
+}
+.live-html {
+  padding: 5px;
+  border: 1px solid #aaa;
+  border-radius: 4px;
+  box-shadow: 3px 3px 3px grey;
+  min-height: 200px;
+  min-width: 200px;
+  background-color: #fafafa;
 }
 .zindex {
   padding: 5px;
@@ -289,6 +305,20 @@ body,
   width: 250px;
   z-index: 1000;
   border: 1px solid #ccc;
+}
+
+.live-editor {
+  position: absolute;
+  right: 10px;
+  top: 270px;
+  z-index: 1000;
+  height: 100px;
+  width: 250px;
+  border: 1px solid #ccc;
+}
+.live-editor textarea {
+  width: 100%;
+  height: 100%;
 }
 
 .add-marker {
