@@ -1,15 +1,15 @@
 <template>
   <div id="app">
     <button
-      class="button"
+      class="button add-marker"
       :style="{'background-color': addMode ? '#66f13d' : '#3d66f1'}"
       @click="addMode=true"
     >{{ addMode ? 'Click on the map' : '+ Add marker' }}</button>
     <button
-      class="button weather"
+      class="button weather add-marker"
       :style="{'background-color': addWeather ? '#6f163d' : '#6d63f1'}"
       @click="addWeather=!addWeather"
-    >{{ addWeather ? 'Weather marker' : 'Icon Marker' }}</button>
+    >{{ addWeather ? 'Weather marker' : '★ Icon Marker' }}</button>
     <table class="alignment">
       <tr>
         <td colspan="3">
@@ -69,12 +69,7 @@
         </button>
       </center>
     </div>
-    <vue-gmap
-      :center="markerCenter"
-      :zoom="12"
-      style="width: 100%; height: 600px"
-      @click="onMapClick"
-    >
+    <vue-gmap :center="markerCenter" :zoom="10" style="width: 100%" @click="onMapClick">
       <cluster>
         <gmap-custom-marker
           v-for="(marker, i) in markers"
@@ -97,15 +92,42 @@
       </cluster>
       <gmap-custom-marker alignment="bottomright" key="supermarker" :marker="markerCenter">
         <div class="card" @click="e => e.stopPropagation()">
-          <small>This is a marker</small>
           <center>
-            <p>{{markerCenter}}</p>
+            <h3>This is a marker</h3>
+            <p>Lat : {{markerCenter.lat}}, Lng : {{markerCenter.lng}}</p>
           </center>
           <img :class="animation" class="icon" :src="src" height="75">
           <div class="input-group">
-            <label>Image url</label>
+            <center>
+              <label>Set marker image urls</label>
+            </center>
+            <br>
             <input type="input" v-model="testText">
           </div>
+        </div>
+      </gmap-custom-marker>
+      <gmap-custom-marker :z-index="zA" :marker="{lat: 50.4272265, lng: 2.95}">
+        <div class="zindex zindex-a">
+          <center>
+            <p>z-index live edit A</p>
+            <p>
+              <b>{{zA}}</b>
+            </p>
+            <button @click="zA++">+</button>
+            <button @click="zA--">-</button>
+          </center>
+        </div>
+      </gmap-custom-marker>
+      <gmap-custom-marker :z-index="zB" :marker="{lat: 50.4272265, lng: 2.80}">
+        <div class="zindex zindex-b">
+          <center>
+            <p>z-index live edit B</p>
+            <p>
+              <b>{{zB}}</b>
+            </p>
+            <button @click="zB++">+</button>
+            <button @click="zB--">-</button>
+          </center>
         </div>
       </gmap-custom-marker>
     </vue-gmap>
@@ -127,6 +149,8 @@ export default {
     return {
       infinite: true,
       selectedAnimation: "",
+      zA: 50,
+      zB: 51,
       testText: "",
       markerCenter: {
         lat: 50.6272265,
@@ -173,13 +197,38 @@ export default {
 
 <style>
 @import "https://cdnjs.cloudflare.com/ajax/libs/animate.css/3.7.0/animate.min.css";
+html,
+body,
+#app,
+.vue-map-container {
+  height: 100%;
+  padding: 0px;
+  margin: 0px;
+}
 * {
   font-family: sans-serif;
+  color: #444;
+}
+.zindex {
+  padding: 5px;
+  border: 1px solid #aaa;
+  border-radius: 4px;
+  box-shadow: 3px 3px 3px grey;
+  min-height: 100px;
+  min-width: 100px;
+}
+.zindex-a {
+  background-color: #bbdddd;
+}
+.zindex-b {
+  background-color: #ddbbdd;
 }
 .card {
-  background-color: #efefef;
+  border-radius: 4px;
+  background-color: #fafafa;
   padding: 15px;
-  border: 1px solid black;
+  box-shadow: 3px 3px 3px grey;
+  border: 1px solid #ccc;
   min-height: 110px;
 }
 .input-group {
@@ -196,6 +245,7 @@ export default {
   padding: 5px;
   border: 1px solid #aaa;
   border-radius: 5px;
+  background-color: #dadafa;
 }
 
 .alignment {
@@ -221,7 +271,7 @@ export default {
 }
 
 .weather {
-  top: 50px;
+  top: 70px;
 }
 
 .icon-sm {
@@ -239,5 +289,10 @@ export default {
   width: 250px;
   z-index: 1000;
   border: 1px solid #ccc;
+}
+
+.add-marker {
+  padding: 8px;
+  font-size: 1.3em;
 }
 </style>
