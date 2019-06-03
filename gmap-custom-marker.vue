@@ -79,7 +79,7 @@ export default {
           const div = self.$el;
           const projection = this.getProjection();
           if (projection && div) {
-            const posPixel = projection.fromLatLngToDivPixel(self.position);
+            const posPixel = projection.fromLatLngToDivPixel(self.latLng);
             let x, y;
             switch (self.alignment) {
               case "top":
@@ -181,6 +181,12 @@ export default {
           return self.lng;
         }
       };
+    },
+    latLng() {
+      if (this.marker instanceof google.maps.LatLng) {
+          return this.marker;
+      }
+      return new google.maps.LatLng(this.lat, this.lng);
     }
   },
   destroyed() {
