@@ -8,10 +8,6 @@ import * as VueGoogleMaps from "vue2-google-maps";
 export default {
   mixins: [VueGoogleMaps.MapElementMixin],
   props: {
-    delayRepaint: {
-      type: Number,
-      default: undefined
-    },
     marker: {
       type: Object,
       default: undefined
@@ -150,14 +146,10 @@ export default {
         }
       }
       this.$overlay = new Overlay(map);
-      if (this.delayRepaint) {
-        setTimeout(() => {
+      setTimeout(() => {
           this.$overlay.repaint();
           this.opacity = 1;
-        }, this.delayRepaint);
-      } else {
-        this.opacity = 1;
-      }
+      }, 100);
     });
   },
   computed: {
@@ -170,17 +162,6 @@ export default {
       return parseFloat(
         isNaN(this.marker.lng) ? this.marker.longitude : this.marker.lng
       );
-    },
-    position() {
-      const self = this;
-      return {
-        lat() {
-          return self.lat;
-        },
-        lng() {
-          return self.lng;
-        }
-      };
     },
     latLng() {
       if (this.marker instanceof google.maps.LatLng) {
@@ -195,3 +176,4 @@ export default {
   }
 };
 </script>
+
