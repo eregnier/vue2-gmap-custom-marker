@@ -108,7 +108,6 @@ Manually specify an offset value for the marker in pixels with prop `offsetX` | 
 `offsetX`|Number|`0`|The number of pixels to move the marker by in the x-direction. Postive values move the marker to the right|Positive or negative number.
 `offsetY`|Number|`0`|The number of pixels to move the marker by in the y-direction. Postive values move the marker to down the page.|Positive or negative number.
 `alignment`|String|`top`|The alignment of the marker element relative to the location it is displayed. e.g. `bottomright` - the marker will be below and on the right of the location.|`top`, `bottom`, `left`, `right`, `center`, `topleft`  `lefttop`, `topright`, `righttop`, `bottomleft`, `leftbottom`, `bottomright`, `rightbottom`
-`delayRepaint`|Number|`0`|Delay before the marker repaint is triggered. This is useful when the inner html is a component that renders asynchronously and where size can be only computed afterward : it prevent marker flickering.| Positive number.
 `zIndex`|Number|`50`| z-index of the marker. | Positive number.
 
 # Licence

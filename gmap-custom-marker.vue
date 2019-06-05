@@ -8,10 +8,6 @@ import * as VueGoogleMaps from "vue2-google-maps";
 export default {
   mixins: [VueGoogleMaps.MapElementMixin],
   props: {
-    delayRepaint: {
-      type: Number,
-      default: undefined
-    },
     marker: {
       type: Object,
       default: undefined
@@ -173,17 +169,6 @@ export default {
         isNaN(this.marker.lng) ? this.marker.longitude : this.marker.lng
       );
     },
-    position() {
-      const self = this;
-      return {
-        lat() {
-          return self.lat;
-        },
-        lng() {
-          return self.lng;
-        }
-      };
-    },
     latLng() {
       if (this.marker instanceof google.maps.LatLng) {
           return this.marker;
@@ -197,3 +182,4 @@ export default {
   }
 };
 </script>
+
