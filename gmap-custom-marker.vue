@@ -152,8 +152,10 @@ export default {
       this.$overlay = new Overlay(map);
       if (this.delayRepaint) {
         setTimeout(() => {
-          this.$overlay.repaint();
-          this.opacity = 1;
+          if (this.$overlay) {
+            this.$overlay.repaint();
+            this.opacity = 1;
+          }
         }, this.delayRepaint);
       } else {
         this.opacity = 1;
