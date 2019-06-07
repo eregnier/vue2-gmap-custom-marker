@@ -7,11 +7,12 @@ Vue.component("cluster", GmapCluster);
 
 Vue.use(VueGoogleMaps, {
   load: {
-    key: "AIzaSyBkOdVJktw6m9OoVMcX1ZU_yU54ODDfFlA",
+    key : process.env.VUE_APP_GMAP_API_KEY,
     v: "3.26"
   },
   installComponents: false
 });
+console.log('key -> ,' ,process.env.VUE_APP_GMAP_API_KEY)
 
 Vue.config.productionTip = false;
 
