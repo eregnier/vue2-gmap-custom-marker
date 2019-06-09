@@ -59,6 +59,9 @@ export default {
   watch: {
     marker(val) {
       this.$mapPromise.then(map => this.$overlay.setPosition());
+    },
+    zIndex(val) {
+      this.$overlay.repaint()
     }
   },
   provide() {
