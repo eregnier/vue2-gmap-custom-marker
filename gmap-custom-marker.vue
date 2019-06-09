@@ -146,10 +146,16 @@ export default {
         }
       }
       this.$overlay = new Overlay(map);
-      setTimeout(() => {
-          this.$overlay.repaint();
-          this.opacity = 1;
-      }, 100);
+      if (this.delayRepaint) {
+        setTimeout(() => {
+          if (this.$overlay) {
+            this.$overlay.repaint();
+            this.opacity = 1;
+          }
+        }, this.delayRepaint);
+      } else {
+        this.opacity = 1;
+      }
     });
   },
   computed: {
