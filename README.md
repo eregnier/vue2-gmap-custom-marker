@@ -9,6 +9,20 @@ This project is a plugin for [vue-google-maps](https://github.com/xkjyeah/vue-go
 
 [Demo from gh-pages branch](https://eregnier.github.io/vue2-gmap-custom-marker/dist/)
 
+# Features
+
+ * Display reactive custom html into markers on google map using slot system
+ 
+ * Live property change allows simple interaction with coordonates and zindex of html marker element
+ 
+ * Google map clustering support (see demo for exemple) 
+ 
+ * Simple positionning system for marker around the origin point
+ 
+ * Specific markers offset X and Y for more control about html element display
+ 
+ * Almost all API of the component is optional, just start with lon, lat property
+
 ## Example
 
 ![custom markers on vue google map](sample.png)
