@@ -30,6 +30,8 @@ This project is a plugin for [vue-google-maps](https://github.com/xkjyeah/vue-go
  
  * Almost all API of the component is optional, just start with lon, lat property
 
+ * Work (around) with nuxt with [this trick](https://github.com/eregnier/vue2-gmap-custom-marker/issues/15#issuecomment-544203425)
+
 ## Example
 
 ![custom markers on vue google map](sample.png)
