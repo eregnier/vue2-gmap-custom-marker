@@ -176,6 +176,9 @@ export default {
     }
   },
   destroyed() {
+    if (this.$clusterObject) {
+      this.$clusterObject.removeMarker(this.$overlay, true);
+    }
     this.$overlay.setMap(null);
     this.$overlay = undefined;
   }
