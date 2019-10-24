@@ -176,12 +176,12 @@ export default {
     }
   },
   destroyed() {
-    if (this.$clusterObject) {
+     if (this.$clusterObject) {
       this.$clusterObject.removeMarker(this.$overlay, true);
+    } else {
+      this.$overlay.setMap(null);
+      this.$overlay = undefined;
     }
-    this.$overlay.setMap(null);
-    this.$overlay = undefined;
   }
 };
 </script>
-
