@@ -145,7 +145,9 @@ export default {
           self.afterCreate(this);
         }
         onRemove() {
-          self.$el.remove();
+          if (self.$el) {
+            self.$el.parentNode.removeChild(self.$el)
+          }
         }
       }
       this.$overlay = new Overlay(map);
