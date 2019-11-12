@@ -145,7 +145,15 @@ export default {
           self.afterCreate(this);
         }
         onRemove() {
-          self.$el.remove();
+          if (self.$el) {
+            const ua = window.navigator.userAgent
+            const msie = ua.indexOf("MSIE ")
+            if (msie > 0 || !!ua.match(/Trident.*rv\:11\./)) {
+              self.$el.parentNode.removeChild(self.$el)
+            } else {
+              self.$el.remove();
+            }
+          }
         }
       }
       this.$overlay = new Overlay(map);
