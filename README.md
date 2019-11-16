@@ -107,8 +107,6 @@ Specify the alignment of the marker with the `alignment` prop. Accepts 13 values
 </gmap-custom-marker>
  ```
 
-This component now supports cluster markers and works like normal vue gmap clusters (since v5.4.3)
-
  ![custom markers on vue google map](alignment.png)
 
 
@@ -121,7 +119,40 @@ Manually specify an offset value for the marker in pixels with prop `offsetX` | 
   :offsetY="17.5"
 >
 </gmap-custom-marker>
- ```
+```
+
+# Clusters
+
+This component supports cluster markers and works like normal vue gmap clusters (since v5.4.3)
+
+You can use cluster marker folowing the guide below:
+
+* Install *marker-clusterer-plus* : `npm i --save marker-clusterer-plus`
+
+* Use plugin cluster in you main.js or so (where vue and plugins are initialized)
+
+```javascript
+// Using Cluster requires marker-clusterer-plus to be installed.
+import GmapCluster from "vue2-google-maps/dist/components/cluster";
+
+// Note: the name "cluster" below is the one to use in the template tags
+Vue.component("cluster", GmapCluster);
+```
+
+* Wrap your custom markers in the gmap component
+
+```vue
+<vue-gmap :center="markerCenter" :zoom="10" style="width: 100%" @click="onMapClick">
+    <cluster>
+        <gmap-custom-marker :marker="marker">
+            <img src="https://vuejs.org/images/logo.png" />
+        </gmap-custom-marker>
+    </cluster>
+<vue-gmap>
+```
+
+All markers into the cluster tag will be managed as a cluster automatically. That's all.
+
 
 # Reference
 
