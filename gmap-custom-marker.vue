@@ -125,8 +125,7 @@ export default {
                 throw new Error("Invalid alignment type of custom marker!");
                 break;
             }
-            div.style.left = x + self.offsetX + "px";
-            div.style.top = y + self.offsetY + "px";
+            div.style.transform = `translate(${x + self.offsetX}px, ${y + self.offsetY}px)`;
             div.style["z-index"] = self.zIndex;
           }
         }
