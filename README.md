@@ -19,15 +19,15 @@ This project is a plugin for [vue-google-maps](https://github.com/xkjyeah/vue-go
 # Features
 
  * Display reactive custom html into markers on google map using slot system
- 
+
  * Live property change allows simple interaction with coordonates and zindex of html marker element
- 
- * Google map clustering support (see demo for exemple) 
- 
+
+ * Google map clustering support (see demo for exemple)
+
  * Simple positionning system for marker around the origin point
- 
+
  * Specific markers offset X and Y for more control about html element display
- 
+
  * Almost all API of the component is optional, just start with lon, lat property
 
  * Work (around) with nuxt with [this trick](https://github.com/eregnier/vue2-gmap-custom-marker/issues/15#issuecomment-544203425)
@@ -153,7 +153,6 @@ Vue.component("cluster", GmapCluster);
 
 All markers into the cluster tag will be managed as a cluster automatically. That's all.
 
-
 # Reference
 
 **Prop**|**Type**|**Default**|**Description**|**Supported Values**
@@ -163,6 +162,7 @@ All markers into the cluster tag will be managed as a cluster automatically. Tha
 `offsetY`|Number|`0`|The number of pixels to move the marker by in the y-direction. Postive values move the marker to down the page.|Positive or negative number.
 `alignment`|String|`top`|The alignment of the marker element relative to the location it is displayed. e.g. `bottomright` - the marker will be below and on the right of the location.|`top`, `bottom`, `left`, `right`, `center`, `topleft`  `lefttop`, `topright`, `righttop`, `bottomleft`, `leftbottom`, `bottomright`, `rightbottom`
 `zIndex`|Number|`50`| z-index of the marker. | Positive number.
+`cssPosition`|Boolean|false| Marker position computed using css. this can optimize render time, but can break layout | true or false.
 
 # Licence
 
