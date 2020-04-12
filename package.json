@@ -9,18 +9,18 @@
   },
   "dependencies": {
     "axios": "^0.18.1",
-    "eslint-plugin-vue": "^5.2.2",
+    "eslint-plugin-vue": "^5.2.3",
     "marker-clusterer-plus": "^2.1.4",
-    "vue": "^2.6.10",
-    "vue2-gmap-custom-marker": "^5.5.8",
-    "vue2-google-maps": "^0.10.6"
+    "vue": "^2.6.11",
+    "vue2-gmap-custom-marker": "^5.6.0",
+    "vue2-google-maps": "^0.10.7"
   },
   "devDependencies": {
-    "@babel/runtime-corejs2": "^7.4.5",
-    "@vue/cli-plugin-babel": "^3.8.0",
-    "@vue/cli-plugin-eslint": "^3.8.0",
-    "@vue/cli-service": "^3.8.0",
-    "vue-template-compiler": "^2.6.10"
+    "@babel/runtime-corejs2": "^7.9.2",
+    "@vue/cli-plugin-babel": "^3.12.1",
+    "@vue/cli-plugin-eslint": "^3.12.1",
+    "@vue/cli-service": "^3.12.1",
+    "vue-template-compiler": "^2.6.11"
   },
   "eslintConfig": {
     "root": true,
