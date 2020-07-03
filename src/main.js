@@ -12,7 +12,6 @@ Vue.use(VueGoogleMaps, {
   },
   installComponents: false
 });
-console.log('key -> ,' ,process.env.VUE_APP_GMAP_API_KEY)
 
 Vue.config.productionTip = false;
 
