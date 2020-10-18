@@ -11,16 +11,16 @@
     "axios": "^0.18.1",
     "eslint-plugin-vue": "^5.2.3",
     "marker-clusterer-plus": "^2.1.4",
-    "vue": "^2.6.11",
-    "vue2-gmap-custom-marker": "^5.6.0",
+    "vue": "^2.6.12",
+    "vue2-gmap-custom-marker": "git+https://github.com/eregnier/vue2-gmap-custom-marker.git",
     "vue2-google-maps": "^0.10.7"
   },
   "devDependencies": {
-    "@babel/runtime-corejs2": "^7.10.4",
+    "@babel/runtime-corejs2": "^7.12.1",
     "@vue/cli-plugin-babel": "^3.12.1",
     "@vue/cli-plugin-eslint": "^3.12.1",
-    "@vue/cli-service": "^4.4.6",
-    "vue-template-compiler": "^2.6.11"
+    "@vue/cli-service": "^4.5.7",
+    "vue-template-compiler": "^2.6.12"
   },
   "eslintConfig": {
     "root": true,
