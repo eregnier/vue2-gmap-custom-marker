@@ -47,10 +47,11 @@ export default {
   },
   methods: {
     afterCreate(inst) {
-      if (this.$clusterPromise) {
+      if (this.$clusterPromise && !this.isMarkerAdded) {
         this.$clusterPromise.then(co => {
           co.addMarker(inst);
           this.$clusterObject = co;
+          this.isMarkerAdded = true;
         });
       }
     }
