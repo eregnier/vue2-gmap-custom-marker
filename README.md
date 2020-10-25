@@ -14,7 +14,7 @@ This project is a plugin for [vue-google-maps](https://github.com/xkjyeah/vue-go
 
 # Demo
 
-[Demo from gh-pages branch](https://eregnier.github.io/vue2-gmap-custom-marker/dist/)
+[Demo](https://vue2-gmap-custom-marker-demo.utopland.net/)
 
 # Features
 
