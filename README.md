@@ -1,6 +1,5 @@
 # vue2-gmap-custom-marker
 
-
 [
  ![npm](https://img.shields.io/npm/v/vue2-gmap-custom-marker.svg)
  ![npm](https://img.shields.io/npm/dm/vue2-gmap-custom-marker.svg)
@@ -10,39 +9,51 @@
 This component allows you to display custom HTML content on the map using Overlay.
 This component is an adaptation of the Google Map V3 overlay code sample with some great ideas from [angularjs google map](https://ngmap.github.io/) from this [component](https://github.com/allenhwkim/angularjs-google-maps/blob/master/directives/custom-marker.js).
 
-This project is a plugin for [vue-google-maps](https://github.com/xkjyeah/vue-google-maps).
+## /!\ important note
 
-# Demo
+This project is originally a plugin for [vue-google-maps](https://github.com/xkjyeah/vue-google-maps).
+Now this project seems no more maintained and a maintained [fork](https://github.com/diegoazh/gmap-vue) has started, As this is a fork, this plugin should work on it seeminglessly. The demo for this project started using this project on 2020-11-10.
+read [this](https://github.com/xkjyeah/vue-google-maps#attention) for more information about this.
+
+For legacy projects using vue-google-maps, you have to stick to this projects tag [5.6.2](https://github.com/eregnier/vue2-gmap-custom-marker/releases/tag/5.6.2).
+
+You might force the 5.6.2 version in your package.json for this plugin to keep compatibility until you want to switch to gmap-vue.
+
+For those that use clusters with this plugin, the new release might break things. For this plugin website demo, I had to create [this folder](https://github.com/eregnier/vue2-gmap-custom-marker-demo/tree/master/public/images) that contains clusters images the clusters uses in vue-gmap. In case you have troubles with this, just create the same folder with the images from the link above in public foler of your vue project (or served in `/images/m1.png` for exemples depending on you webserver configuration.)
+
+## Demo
 
 [Demo](https://vue2-gmap-custom-marker-demo.utopland.net/)
 
-# Features
+You might look at this [demo code repository](https://github.com/eregnier/vue2-gmap-custom-marker-demo) for features usage and complete exemple around this plugin.
 
- * Display reactive custom html into markers on google map using slot system
+## Features
 
- * Live property change allows simple interaction with coordonates and zindex of html marker element
+* Display reactive custom html into markers on google map using slot system
 
- * Google map clustering support (see demo for exemple)
+* Live property change allows simple interaction with coordonates and zindex of html marker element
 
- * Simple positionning system for marker around the origin point
+* Google map clustering support (see demo for exemple)
 
- * Specific markers offset X and Y for more control about html element display
+* Simple positionning system for marker around the origin point
 
- * Almost all API of the component is optional, just start with lon, lat property
+* Specific markers offset X and Y for more control about html element display
 
- * Work (around) with nuxt with [this trick](https://github.com/eregnier/vue2-gmap-custom-marker/issues/15#issuecomment-544203425)
+* Almost all API of the component is optional, just start with lon, lat property
+
+* Work (around) with nuxt with [this trick](https://github.com/eregnier/vue2-gmap-custom-marker/issues/15#issuecomment-544203425)
 
 ## Example
 
 ![custom markers on vue google map](sample.png)
 
-# Installation
+## Installation
 
 Install the package from [npm](https://www.npmjs.com/package/vue2-gmap-custom-marker):
 
 `npm i vue2-gmap-custom-marker`
 
-# Basic Usage
+## Basic Usage
 
 Import the component and use it in the components object.
 
@@ -109,7 +120,6 @@ Specify the alignment of the marker with the `alignment` prop. Accepts 13 values
 
  ![custom markers on vue google map](alignment.png)
 
-
 Manually specify an offset value for the marker in pixels with prop `offsetX` | `offsetY`. A positive `offsetX` moves the marker further right, and a positive `offsetY` moves the marker further down the page. Can be used with the `alignment` prop.
 
  ```vue
@@ -121,7 +131,7 @@ Manually specify an offset value for the marker in pixels with prop `offsetX` | 
 </gmap-custom-marker>
 ```
 
-# Clusters
+## Clusters
 
 This component supports cluster markers and works like normal vue gmap clusters (since v5.4.3)
 
@@ -133,7 +143,7 @@ You can use cluster marker folowing the guide below:
 
 ```javascript
 // Using Cluster requires marker-clusterer-plus to be installed.
-import GmapCluster from "vue2-google-maps/dist/components/cluster";
+import GmapCluster from "gmap-vue/dist/components/cluster";
 
 // Note: the name "cluster" below is the one to use in the template tags
 Vue.component("cluster", GmapCluster);
@@ -153,7 +163,7 @@ Vue.component("cluster", GmapCluster);
 
 All markers into the cluster tag will be managed as a cluster automatically. That's all.
 
-# Reference
+## Reference
 
 **Prop**|**Type**|**Default**|**Description**|**Supported Values**
 :-----:|:-----:|:-----:|:-----:|:-----:
@@ -164,6 +174,6 @@ All markers into the cluster tag will be managed as a cluster automatically. Tha
 `zIndex`|Number|`50`| z-index of the marker. | Positive number.
 `cssPosition`|Boolean|false| Marker position computed using css. this can optimize render time, but can break layout | true or false.
 
-# Licence
+## Licence
 
 [MIT](https://en.wikipedia.org/wiki/MIT_License)
