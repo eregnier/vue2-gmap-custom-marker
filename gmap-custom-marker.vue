@@ -198,8 +198,10 @@
       if (this.$clusterObject) {
         this.$clusterObject.removeMarker(this.$overlay, true);
       } else {
-        this.$overlay.setMap(null);
-        this.$overlay = undefined;
+	if (this.$overlay) {
+          this.$overlay.setMap(null);
+          this.$overlay = undefined;
+	}
       }
     }
   };
