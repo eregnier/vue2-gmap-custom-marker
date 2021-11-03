@@ -23,7 +23,7 @@ For those that use clusters with this plugin, the new release might break things
 
 ## Demo
 
-[Demo](https://vue2-gmap-custom-marker-demo.utopland.net/)
+[Demo](https://vue2-gmap-custom-marker-demo.pages.dev/)
 
 You might look at this [demo code repository](https://github.com/eregnier/vue2-gmap-custom-marker-demo) for features usage and complete exemple around this plugin.
 
