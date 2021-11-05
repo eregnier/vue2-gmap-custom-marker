@@ -177,3 +177,10 @@ All markers into the cluster tag will be managed as a cluster automatically. Tha
 ## Licence
 
 [MIT](https://en.wikipedia.org/wiki/MIT_License)
+
+## Support
+
+If you want to support this plugin it is possible :smile: 
+
+[![paypal](https://www.paypalobjects.com/en_US/i/btn/btn_donate_LG.gif)](https://www.paypal.com/cgi-bin/webscr?cmd=_s-xclick&hosted_button_id=UV5GR9QWPAEMS)
+
