@@ -6,10 +6,9 @@
 ](https://www.npmjs.com/package/vue2-gmap-custom-marker)
 ![vue2](https://img.shields.io/badge/vue-2.x-brightgreen.svg)
 
-This component allows you to display custom HTML content on the map using Overlay.
-This component is an adaptation of the Google Map V3 overlay code sample with some great ideas from [angularjs google map](https://ngmap.github.io/) from this [component](https://github.com/allenhwkim/angularjs-google-maps/blob/master/directives/custom-marker.js).
+This component makes it simple to display some custom vue js reactive components on a google map.
 
-## /!\ important note
+## ⚠️ important note
 
 This project is originally a plugin for [vue-google-maps](https://github.com/xkjyeah/vue-google-maps).
 Now this project seems no more maintained and a maintained [fork](https://github.com/diegoazh/gmap-vue) has started, As this is a fork, this plugin should work on it seeminglessly. The demo for this project started using this project on 2020-11-10.
