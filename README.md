@@ -7,7 +7,6 @@
 ![vue2](https://img.shields.io/badge/vue-2.x-brightgreen.svg)
 
 This component allows you to display custom HTML content on the map using Overlay.
-This component is an adaptation of the Google Map V3 overlay code sample with some great ideas from [angularjs google map](https://ngmap.github.io/) from this [component](https://github.com/allenhwkim/angularjs-google-maps/blob/master/directives/custom-marker.js).
 
 ## /!\ important note
 
