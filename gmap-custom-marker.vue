@@ -31,7 +31,11 @@
       cssPosition: {
         type: Boolean,
         default: false
-      }
+      },
+      nuxtMode: {
+        type: Boolean,
+        default: false,
+      },
     },
     inject: {
       $clusterPromise: {
@@ -83,6 +87,9 @@
           }
           repaint () {
             const div = self.$el;
+            if (self.nuxtMode && !div.offsetWidth && !div.offsetHeight) {
+              return;
+            }
             const projection = this.getProjection();
             if (projection && div) {
               const posPixel = projection.fromLatLngToDivPixel(self.latLng);
