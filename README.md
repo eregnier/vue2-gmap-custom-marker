@@ -173,6 +173,7 @@ All markers into the cluster tag will be managed as a cluster automatically. Tha
 `offsetY`|Number|`0`|The number of pixels to move the marker by in the y-direction. Postive values move the marker to down the page.|Positive or negative number.
 `alignment`|String|`top`|The alignment of the marker element relative to the location it is displayed. e.g. `bottomright` - the marker will be below and on the right of the location.|`top`, `bottom`, `left`, `right`, `center`, `topleft`  `lefttop`, `topright`, `righttop`, `bottomleft`, `leftbottom`, `bottomright`, `rightbottom`
 `zIndex`|Number|`50`| z-index of the marker. | Positive number.
+`nuxtMode`|Boolean|true| Avoid marker displacement on navigation in Nuxt. | `true`, `false`
 
 ## Licence
 
