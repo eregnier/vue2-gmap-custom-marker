@@ -8,7 +8,7 @@
 
 This component makes it simple to display some custom vue js reactive components on a google map.
 
-🆕 There is a plugin package for [gmap vue 3 here](https://github.com/eregnier/vue3-gmap-custom-marker) (in beta at the moment)
+🆕 There is a plugin package for [gmap vue 3 here](https://github.com/eregnier/vue3-gmap-custom-marker)
 
 ## ⚠️ important note
 
