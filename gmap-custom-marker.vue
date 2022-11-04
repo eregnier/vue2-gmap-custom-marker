@@ -197,7 +197,7 @@ export default {
   destroyed() {
      if (this.$clusterObject) {
       this.$clusterObject.removeMarker(this.$overlay, true);
-    } else {
+    } else if (this.$overlay) {
       this.$overlay.setMap(null);
       this.$overlay = undefined;
     }
