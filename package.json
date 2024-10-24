@@ -26,6 +26,6 @@
   "homepage": "https://github.com/eregnier/vue2-gmap-custom-marker#readme",
   "dependencies": {
     "gmap-vue": "^1.5.0",
-    "vue": "^2.x"
+    "vue": "^3.x"
   }
 }
